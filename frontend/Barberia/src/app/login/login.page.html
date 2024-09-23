@@ -1,0 +1,66 @@
+<ion-content [fullscreen]="true">
+  <div class="content">
+    <div class="secundario">
+      <!-- Logo -->
+      <ion-img src="assets/logo.jpeg" alt="Logo" class="logo"></ion-img>
+
+      <!-- Formulario -->
+      <form [formGroup]="loginForm ">
+        <!-- Email -->
+        <ion-input
+          formControlName="email"
+          type="email"
+          inputmode="email"
+          label="Correo"
+          labelPlacement="floating"
+          fill="outline"
+        >
+        </ion-input>
+        <!-- Password -->
+        <ion-input
+          formControlName="password"
+          label="Contraseña"
+          labelPlacement="floating"
+          clearOnEdit="false"
+          fill="outline"
+          type="password"
+          (ionInput)="onInput($event)"
+        >
+          <!-- Si la contraseña tiene unm valor entonces se muestra el botón para que pueda hacerla visible -->
+          @if (pass) {
+          <ion-input-password-toggle
+            color="medium"
+            slot="end"
+          ></ion-input-password-toggle>
+          }
+        </ion-input>
+      </form>
+
+      <!-- Si el usuario presiona el botón de "iniciemos", se activa el boton cargando, de lo contrario se muestra el botón "iniciemos" -->
+      <div class="iniciemos">
+        @if (isLogin) {
+        <ion-button>
+          <ion-spinner name="lines-small"></ion-spinner>
+        </ion-button>
+        }@else {
+        <ion-button [disabled]="loginForm.invalid" (click)="login()">
+          iniciemos
+        </ion-button>
+        }
+      </div>
+
+      <!-- Olvidé mi contraseña -->
+      <div class="olvide">
+        <ion-label routerLink="/recuperar">
+          ¿Has olvidado tu Contraseña?
+        </ion-label>
+      </div>
+
+      <div class="unete">
+        <ion-button routerLink="/registro" class="unete">
+          unete a nosotros
+        </ion-button>
+      </div>
+    </div>
+  </div>
+</ion-content>

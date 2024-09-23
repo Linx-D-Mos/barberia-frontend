@@ -1,0 +1,44 @@
+
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  /* background-color: red; */
+}
+
+.logo {
+  width: 240px;
+  height: 240px;
+  margin: auto;
+}
+
+.usuario,
+.email,
+.numero,
+.password,
+.confirmar{
+  padding-top: 5%;
+}
+
+
+.datos{
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+.button {
+  width: 100%;
+  padding-top: 8%;
+  text-transform: capitalize;
+  font-size: 23px;
+  --background: rgb(61, 31, 231);
+  padding-bottom: 8%;
+}
+
+.back {
+  padding-top: 6%;
+  padding-left: 5%;
+}

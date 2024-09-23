@@ -1,0 +1,32 @@
+<ion-content>
+  <ion-icon (click)="goBack()" class="back" size="large" name="arrow-back-outline"></ion-icon>
+  <ion-img class="logo" src="assets/logo.jpeg"></ion-img>
+  <form formGroup="regisForm">
+    <div class="datos">
+      <div class="usuario">
+        <ion-input formControlName="name" label="Usuario" label-placement="floating" fill="outline">
+        </ion-input>
+      </div>
+      <div class="email">
+        <ion-input formControlName="email" type="Email" label="Email" label-placement="floating" fill="outline" placeholder="ejemplo@gmail.com">
+        </ion-input>
+      </div>
+      <div class="numero">
+        <ion-input formControlName="phone" type="tel" label="Numero Movil" label-placement="floating" fill="outline" placeholder="312-999-2212">
+        </ion-input>
+      </div>
+      <div class="password">
+        <ion-input formControlName="password" type="password" label="Contraseña" label-placement="floating" fill="outline">
+        </ion-input>
+      </div>
+      <div class="confirmar">
+        <ion-input formControlName="password_confirmation" label="Confirmar contraseña" type="password" label-placement="floating" fill="outline">
+  
+        </ion-input>
+      </div>
+      <ion-button class="button" (click)="registrar()">
+        Registrar
+      </ion-button>
+    </div>
+  </form>
+</ion-content>

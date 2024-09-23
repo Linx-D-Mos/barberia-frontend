@@ -1,0 +1,167 @@
+/* body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.logo {
+  margin-top: 8%;
+  width: 300px;
+  height: 300px;
+  
+}
+
+
+.email {
+  padding-top: 6%;
+  width: 100%;
+  padding-left: 10%;
+  padding-right: 10%;
+  text-align: left;
+ 
+ 
+}
+
+.password {
+  margin-top: 10%;
+  width: 100%;
+  padding-left: 10%;
+  padding-right: 10%;
+  text-align: left;
+
+}
+
+.iniciemos {
+  padding-top: 7%;
+  width: 100%;
+  
+  font-size: 21px;
+  --background: rgb(49, 22, 199);
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+.cargando {
+  padding-top: 7%;
+  width: 100%;
+  --background: rgb(49, 22, 199);
+  padding-left: 10%;
+  padding-right: 10%;
+
+  ion-spinner {
+    height: 21px;
+  }
+}
+
+.iniciemos:active{
+  --background: rgb(61, 31, 231);
+}
+
+.recuperar {
+  margin-top: 6%;
+
+  
+ 
+}
+
+.recuperar ion-label:active {
+  color: rgb(61, 31, 231);
+  text-decoration: underline;
+  width: 100%;
+  
+}
+
+.unete {
+  
+  padding-left: 10%;
+  padding-right: 10%;
+  margin-top: 6%;
+  width: 100%;
+ 
+  font-size: 20px;
+  --background: rgb(177, 177, 177);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  //background-color: red;
+} */
+
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.secundario {
+  width: 100vh;
+}
+
+ion-img {
+  margin-bottom: 35%;
+  max-width: 350px;
+  max-height: 350px;
+  width: 75%;
+  height: 75%;
+  margin: auto;
+}
+
+ion-input {
+  width: 80%;
+  max-width: 20rem;
+  margin: 1.5rem auto;
+}
+
+ion-button {
+  --border-width: 1px;
+  --border-radius: 10px;
+  --border-style: solid;
+  --border-color: #b9b9b956;
+
+  --box-shadow: 0 4px 8px 0 rgb(0, 0, 0, 0.25);
+
+  --ripple-color: #7e7c7c;
+
+  --padding-top: 10px;
+  --padding-bottom: 10px;
+
+  width: 80%;
+  max-width: 20rem;
+}
+
+.iniciemos {
+  display: flex;
+  justify-content: center;
+  margin: 0;
+
+  ion-button {
+    height: 3rem;
+    margin-bottom: 1.3rem;
+    text-decoration-color: #000000;
+    --background: #b6b6b6;
+    --color: black;
+    font-size: larger;
+  }
+}
+
+.olvide {
+  display: flex;
+  justify-content: center;
+}
+
+.unete {
+  display: flex;
+  justify-content: center;
+  margin: 0;
+
+  ion-button {
+    margin-top: 3rem;
+    margin-bottom: .8rem;
+    --background: #606160;
+  }
+}

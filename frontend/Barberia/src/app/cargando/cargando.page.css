@@ -1,0 +1,25 @@
+body {
+    box-sizing: border-box;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+ion-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Asegura que el contenedor ocupe toda la altura */
+    text-align: center;
+    font-style: oblique;
+}
+
+.cargando,
+.spinner {
+    margin: 10px 0;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+ion-spinner {
+    --color: #000;
+}

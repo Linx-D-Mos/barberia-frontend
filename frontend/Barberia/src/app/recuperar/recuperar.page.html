@@ -1,0 +1,21 @@
+<ion-content [fullscreen]="true">
+  <ion-icon (click)="goBack()" class="back" size="large" name="arrow-back-outline"></ion-icon>
+  <div class="container">
+    <ion-img class="logo" src="assets/logo.jpeg"></ion-img>
+    <div class="correo">
+      <ion-input label="Ingresa tu correo" label-placement="floating" fill="outline" placeholder="ejemplo@gmail.com">
+      </ion-input>
+    </div>
+    <ion-button id="recovery">
+      Recuperar
+    </ion-button>
+    <div class="reenviar">
+      <ion-label>
+        ¿No recibiste el correo?
+      </ion-label>
+    </div>
+    <ion-button class="btnReenviar">
+      Reenviar correo
+    </ion-button>
+  </div>
+</ion-content>

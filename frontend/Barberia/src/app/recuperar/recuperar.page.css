@@ -1,0 +1,49 @@
+ion-content {
+  /* --background: black; */
+  padding: 0 20px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  /* background-color: red; */
+}
+
+.logo {
+ margin: auto;
+  width: 300px;
+  height: 300px;
+}
+
+.correo {
+  padding-top: 50px;
+  width: 80%;
+  text-align: left;
+}
+
+#recovery {
+  width: 80%;
+  font-size: 20px;
+  padding: 20px 0 0 0;
+}
+
+.reenviar {
+  margin-top: 15px;
+}
+
+.btnReenviar {
+  --background: rgb(184, 183, 183);
+  width: 80%;
+  font-size: 16px;
+  padding-top: 3%;
+}
+
+.back {
+  padding-top: 6%;
+  margin-left: 5%;
+  
+  /* background-color: red; */
+}
