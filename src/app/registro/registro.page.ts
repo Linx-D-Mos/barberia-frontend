@@ -1,17 +1,18 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormControl, FormGroup, FormsModule, Validators } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonImg, IonInput, IonItem, IonTabButton, IonButton, IonBackButton, IonIcon } from '@ionic/angular/standalone';
 import { addIcons, } from 'ionicons';
-import { arrowBackOutline } from 'ionicons/icons';
+import { arrowBack, arrowBackOutline } from 'ionicons/icons';
 import { NavController } from '@ionic/angular/standalone';
 import { AuthService } from '../services/auth/auth.service';
+import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-registro',
   templateUrl: './registro.page.html',
   styleUrls: ['./registro.page.css'],
   standalone: true,
-  imports: [IonIcon, IonBackButton, IonButton, IonTabButton, IonItem, IonInput, IonImg, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [RouterLink, IonIcon, IonBackButton, IonButton, IonTabButton, IonItem, IonInput, IonImg, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, ReactiveFormsModule]
 })
 export class RegistroPage implements OnInit {
 
@@ -19,7 +20,7 @@ export class RegistroPage implements OnInit {
   regisForm: any;
 
   constructor(private nav: NavController) {
-    addIcons({ arrowBackOutline })
+    addIcons({ arrowBack, arrowBackOutline });
   }
 
   ngOnInit() {

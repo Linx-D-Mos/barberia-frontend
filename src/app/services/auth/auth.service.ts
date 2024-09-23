@@ -2,7 +2,9 @@ import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { CapacitorHttp } from '@capacitor/core';
 import { Preferences } from '@capacitor/preferences';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ToastController } from '@ionic/angular';
+import { addIcons } from 'ionicons';
+import { alertCircle, warning } from 'ionicons/icons';
 import { BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment.prod';
 
@@ -10,6 +12,9 @@ import { environment } from 'src/environments/environment.prod';
   providedIn: 'root',
 })
 export class AuthService {
+  constructor() {
+    addIcons({ alertCircle, warning });
+  }
   /* ************************************ INYECCIONES ****************************************** */
 
   /**
@@ -23,6 +28,12 @@ export class AuthService {
    * @property {AlertController} #alertCtrl - Inyección del servicio AlertController para mostrar alertas.
    */
   #alertCtrl = inject(AlertController);
+
+  /**
+   * @private
+   * @property {ToastController} #toastCtrl - Inyección del servicio ToastController para mostrar toasts.
+   */
+  #toastCtrl = inject(ToastController);
 
   /* ******************************** FIN DE LAS INYECCIONES ************************************ */
 
@@ -364,5 +375,18 @@ export class AuthService {
    */
   navigateByUrl(url: string) {
     this.#router.navigateByUrl(url, { replaceUrl: true });
+  }
+
+  async showToast(message: string) {
+    const toast = await this.#toastCtrl.create({
+      message: message,
+      position: 'top',
+      positionAnchor: 'header',
+      duration: 3000,
+      icon: 'warning',
+      color: 'warning',
+    });
+
+    await toast.present();
   }
 }

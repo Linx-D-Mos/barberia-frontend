@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { IonHeader, IonToolbar, IonTitle, IonContent, IonItem, IonInput, IonImg, IonButton, IonBackButton, IonTabButton, IonLabel, NavController, IonSpinner, IonInputPasswordToggle } from '@ionic/angular/standalone';
-import { ReactiveFormsModule, FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { ReactiveFormsModule, FormGroup, Validators, FormControl } from '@angular/forms';
 import { AuthService } from '../services/auth/auth.service'; // Asegúrate de que la ruta sea correcta
 
 @Component({
@@ -13,6 +13,9 @@ import { AuthService } from '../services/auth/auth.service'; // Asegúrate de qu
 })
 export class LoginPage implements OnInit {
 
+  constructor() {
+    
+  }
   loginForm!: FormGroup; // Formulario de login
 
   isLogin = false; 
@@ -21,10 +24,15 @@ export class LoginPage implements OnInit {
    * Variable para almacenar la contraseña
    */
   pass: any;
-
-  // private authService = inject(Auth2Service);
-  private authService = inject(AuthService);
   
+  /**
+   * Servicio de autenticación inyectado.
+   * 
+   * @private
+   * @type {AuthService}
+   */
+  private authService = inject(AuthService);
+
   ngOnInit() {
     /* Inincializamos el formulario */
     this.loginForm = new FormGroup({
@@ -45,15 +53,14 @@ export class LoginPage implements OnInit {
           this.loginForm.reset();
         }else{
           this.isLogin = false;
-          this.authService.showAlert(response?.data?.message);
+          this.authService.showToast(response?.data?.message);
         }
       })
       .catch((e) => {
         this.isLogin = false;
-        this.authService.showAlert(e?.error?.message);
+        this.authService.showToast(e?.error?.message);
       });
   }
-
   
   /**
    * Función para obtener el valor del input de la contraseña
