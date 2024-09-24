@@ -48,7 +48,7 @@ export class LoginPage implements OnInit {
     this.authService.login(this.loginForm.value)
       .then((response) => {
         if (response?.data?.success === 1) {
-          this.authService.navigateByUrl('/cargando');
+          this.authService.navigateByUrl('/citas');
           this.isLogin = false;
           this.loginForm.reset();
         }else{
