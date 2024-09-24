@@ -23,6 +23,8 @@ export class CitasPage implements OnInit {
 
   users: any[] = [];
   date: string = '';
+
+  perfil: any;
   public loaded: boolean = false;
   public ionContentList = [1, 2, 3, 4, 5, 6, 7, 8];
   private nav = inject(NavController);
