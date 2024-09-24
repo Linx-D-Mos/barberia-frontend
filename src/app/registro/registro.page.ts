@@ -10,7 +10,7 @@ import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-registro',
   templateUrl: './registro.page.html',
-  styleUrls: ['./registro.page.css'],
+  styleUrls: ['./registro.page.scss'],
   standalone: true,
   imports: [RouterLink, IonIcon, IonBackButton, IonButton, IonTabButton, IonItem, IonInput, IonImg, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, ReactiveFormsModule]
 })
@@ -44,7 +44,7 @@ export class RegistroPage implements OnInit {
     this.authService.register(this.regisForm.value)
       .then((response) => {
         if (response?.data?.success === 1) {
-          this.authService.navigateByUrl('/cargando'); // Redirigir a la página correspondiente
+          this.authService.navigateByUrl('/barberias'); // Redirigir a la página correspondiente
           this.regisForm.reset();
         } else {
           this.authService.showAlert(response?.data?.message);

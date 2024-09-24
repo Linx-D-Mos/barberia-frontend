@@ -7,7 +7,7 @@ import { arrowBackOutline } from 'ionicons/icons';
 @Component({
   selector: 'app-recuperar',
   templateUrl: './recuperar.page.html',
-  styleUrls: ['./recuperar.page.css'],
+  styleUrls: ['./recuperar.page.scss'],
   standalone: true,
   imports: [IonIcon, IonButton, IonLabel, IonInput, IonImg, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
 })

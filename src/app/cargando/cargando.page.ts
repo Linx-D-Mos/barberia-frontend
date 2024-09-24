@@ -8,7 +8,7 @@ import { LoadingComponent } from '../loading/loading.component';
 @Component({
   selector: 'app-cargando',
   templateUrl: './cargando.page.html',
-  styleUrls: ['./cargando.page.css'], // Cambia a .scss si estás usando SCSS
+  styleUrls: ['./cargando.page.scss'], // Cambia a .scss si estás usando SCSS
   standalone: true,
   imports: [LoadingComponent,CommonModule, FormsModule, IonicModule]
 })

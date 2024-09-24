@@ -5,34 +5,28 @@ body {
 }
 
 .container {
-    display: flex;
-    flex-direction: row;
-    gap: 30px;
-    padding: 0 25px;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    /* background-color: red; */
-}
-
-.logo {
-    border-radius: 50%;
-    width: 45%;
-    /* Ajusta el tamaño según sea necesario */
-
-    object-fit: cover;
-}
-
-.account {
-    width: 140px;
-    height: 140px;
+  
+    padding-left: 4%;
+    padding-right: 4%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Distribuir el espacio entre los elementos */
+  ion-icon{
+    width: 80px;
+    height: 80px;
+  }
+  ion-img{
+    width: 100px;
+    height: 100px;
+  }
 }
 
 .name {
-    font-size: 20px;
-    font-weight: bold;
-    font-family: "PT Sans", sans-serif;
-    font-style: normal;
+ 
+    font-size: 17px;
+  text-align: center; /* Centrar el texto */
+  flex-grow: 1; /* Permitir que el label ocupe el espacio disponible */
 }
 
 ion-skeleton-text {

@@ -1,0 +1,29 @@
+.container {
+    padding-top: 3%;
+    padding-left: 7%;
+    padding-right: 7%;
+    
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Distribuir el espacio entre los elementos */
+ 
+}
+.account{
+        width: 60px;
+        height: 60px;
+     }
+.back{
+    
+}
+
+.label {
+ 
+    font-size: 19px;
+  text-align: center; /* Centrar el texto */
+  flex-grow: 1; /* Permitir que el label ocupe el espacio disponible */
+}
+
+
+
+

@@ -1,4 +1,5 @@
-<ion-content [fullscreen]="true">
+<ion-header>
+<ion-toolbar>
   <div class="container">
     <ion-img routerLink="/home" class="logo" src="assets/logo.jpeg"></ion-img>
     <ion-label class="name">
@@ -11,8 +12,14 @@
         </p>
       }
     </ion-label>
-    <ion-icon class="account" name="person-circle-outline" size="large"></ion-icon>
+    <ion-icon (click)="profile()" class="account" name="person-circle-outline"  size="large"></ion-icon>
+    
   </div>
+</ion-toolbar>
+
+</ion-header>
+<ion-content [fullscreen]="true">
+ 
   @if(loaded) {
     <!--lista de cards de citas pendientes-->
     <ion-card class="cartas" *ngFor="let user of users">

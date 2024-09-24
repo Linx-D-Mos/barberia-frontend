@@ -1,20 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ActionSheetController, AlertController } from '@ionic/angular'; 
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonListHeader, IonList, IonItem, IonThumbnail, IonSkeletonText, IonContent, IonHeader, IonTitle, IonToolbar, IonCard, IonFooter, IonCardContent, IonButton, IonCardHeader, IonCardTitle, IonCardSubtitle, IonIcon, IonLabel, IonImg } from '@ionic/angular/standalone';
+import { IonListHeader, IonList, IonItem, IonThumbnail, IonSkeletonText, IonContent, IonHeader, IonTitle, IonToolbar, IonCard, IonFooter, IonCardContent, IonButton, IonCardHeader, IonCardTitle, IonCardSubtitle, IonIcon, IonLabel, IonImg, IonActionSheet } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { personCircleOutline } from 'ionicons/icons';
 import { CapacitorHttp, HttpResponse } from '@capacitor/core';
 import { from, Observable } from 'rxjs';
 import { delay, tap } from 'rxjs/operators';
+import { NavController } from '@ionic/angular/standalone';
+
+
 
 @Component({
   selector: 'app-citas',
   templateUrl: './citas.page.html',
-  styleUrls: ['./citas.page.css'],
+  styleUrls: ['./citas.page.scss'],
   standalone: true,
-  imports: [IonListHeader, IonList, IonItem, IonThumbnail, IonSkeletonText, IonImg, IonLabel, IonIcon, IonCardSubtitle, IonCardTitle, IonCardHeader, IonButton, IonCardContent, IonFooter, IonCard, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [IonActionSheet, IonListHeader, IonList, IonItem, IonThumbnail, IonSkeletonText, IonImg, IonLabel, IonIcon, IonCardSubtitle, IonCardTitle, IonCardHeader, IonButton, IonCardContent, IonFooter, IonCard, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
 })
 export class CitasPage implements OnInit {
 
@@ -22,6 +25,8 @@ export class CitasPage implements OnInit {
   date: string = '';
   public loaded: boolean = false;
   public ionContentList = [1, 2, 3, 4, 5, 6, 7, 8];
+  private nav = inject(NavController);
+ 
 
   constructor(
     private actionSheetController: ActionSheetController,
@@ -109,4 +114,9 @@ export class CitasPage implements OnInit {
 
     await alert.present();
   }
+
+ profile(){
+  this.nav.navigateForward('/perfil')
+ }
+
 }
