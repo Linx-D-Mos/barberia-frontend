@@ -1,15 +1,15 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { RouterModule, RouterOutlet } from '@angular/router';
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonItem, IonInput, IonImg, IonButton, IonBackButton, IonTabButton, IonLabel, NavController, IonSpinner, IonInputPasswordToggle } from '@ionic/angular/standalone';
+import { IonHeader, IonToolbar, IonTitle, IonContent, IonItem, IonInput, IonImg, IonButton, IonBackButton, IonTabButton, IonLabel, NavController, IonSpinner, IonInputPasswordToggle, IonToast } from '@ionic/angular/standalone';
 import { ReactiveFormsModule, FormGroup, Validators, FormControl } from '@angular/forms';
 import { AuthService } from '../services/auth/auth.service'; // Asegúrate de que la ruta sea correcta
 
 @Component({
   selector: 'app-home',
   templateUrl: 'login.page.html',
-  styleUrls: ['login.page.css'],
+  styleUrls: ['login.page.scss'],
   standalone: true,
-  imports: [IonInputPasswordToggle, IonSpinner, ReactiveFormsModule, IonLabel, IonTabButton, IonBackButton, IonButton, IonImg, IonInput, IonItem, IonHeader, IonToolbar, IonTitle, IonContent, RouterModule, RouterOutlet],
+  imports: [IonToast, IonInputPasswordToggle, IonSpinner, ReactiveFormsModule, IonLabel, IonTabButton, IonBackButton, IonButton, IonImg, IonInput, IonItem, IonHeader, IonToolbar, IonTitle, IonContent, RouterModule, RouterOutlet],
 })
 export class LoginPage implements OnInit {
 
