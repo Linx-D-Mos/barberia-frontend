@@ -31,7 +31,12 @@
                 "output": "assets"
               }
             ],
-            "styles": ["src/global.scss", "src/theme/variables.scss"],
+            "styles": [
+              "src/global.scss",
+              "src/theme/variables.scss",
+              "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
+              "node_modules/primeng/resources/primeng.min.css"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -106,7 +111,10 @@
                 "output": "assets"
               }
             ],
-            "styles": ["src/global.scss", "src/theme/variables.scss"],
+            "styles": [
+              "src/global.scss",
+              "src/theme/variables.scss"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -119,7 +127,10 @@
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
           }
         }
       }

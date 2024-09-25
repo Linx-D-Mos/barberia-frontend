@@ -1,18 +1,19 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonImg, IonInput, IonItem, IonTabButton, IonButton, IonBackButton, IonIcon } from '@ionic/angular/standalone';
+import { IonActionSheet, IonContent, IonHeader, IonTitle, IonToolbar, IonImg, IonInput, IonItem, IonTabButton, IonButton, IonBackButton, IonIcon } from '@ionic/angular/standalone';
 import { addIcons, } from 'ionicons';
 import { arrowBack, arrowBackOutline } from 'ionicons/icons';
 import { NavController } from '@ionic/angular/standalone';
 import { AuthService } from '../services/auth/auth.service';
 import { RouterLink } from '@angular/router';
+
 @Component({
   selector: 'app-registro',
   templateUrl: './registro.page.html',
   styleUrls: ['./registro.page.scss'],
   standalone: true,
-  imports: [RouterLink, IonIcon, IonBackButton, IonButton, IonTabButton, IonItem, IonInput, IonImg, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, ReactiveFormsModule]
+  imports: [IonActionSheet, RouterLink, IonIcon, IonBackButton, IonButton, IonTabButton, IonItem, IonInput, IonImg, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, ReactiveFormsModule]
 })
 export class RegistroPage implements OnInit {
 
@@ -44,6 +45,7 @@ export class RegistroPage implements OnInit {
     this.authService.register(this.regisForm.value)
       .then((response) => {
         if (response?.data?.success === 1) {
+
           this.authService.navigateByUrl('/barberias'); // Redirigir a la página correspondiente
           this.regisForm.reset();
         } else {
@@ -54,6 +56,30 @@ export class RegistroPage implements OnInit {
         this.authService.showAlert(e?.error?.message);
       });
   }
+
+  public actionSheetButtons = [
+    {
+      text: 'Delete',
+      role: 'destructive',
+      data: {
+        action: 'delete',
+      },
+    },
+    {
+      text: 'Share',
+      data: {
+        action: 'share',
+      },
+    },
+    {
+      text: 'Cancel',
+      role: 'cancel',
+      data: {
+        action: 'cancel',
+      },
+    },
+  ];
+
 
   goBack() {
     this.nav.back();

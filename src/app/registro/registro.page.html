@@ -11,9 +11,10 @@
       <div class="usuario">
         <ion-input
           formControlName="name"
-          label="Usuario"
+          label="Nombre"
           label-placement="floating"
           fill="outline"
+          placeholder="Alex"
         >
         </ion-input>
       </div>
@@ -46,6 +47,7 @@
           label="Contraseña"
           label-placement="floating"
           fill="outline"
+          placeholder="********"
         >
         </ion-input>
       </div>
@@ -56,10 +58,18 @@
           type="password"
           label-placement="floating"
           fill="outline"
+          placeholder="********"
         >
         </ion-input>
       </div>
-      <ion-button class="button" (click)="registrar()"> Registrar </ion-button>
+      <ion-button id="open-action-sheet"> Registrar </ion-button>
     </div>
   </form>
+  <ion-action-sheet
+  trigger="open-action-sheet"
+  class="my-custom-class"
+  header="Ingresa el código de verificación enviado a tu correo"
+  subHeader="correoPrueba"
+  [buttons]="actionSheetButtons"
+></ion-action-sheet>
 </ion-content>

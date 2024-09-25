@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { ActionSheetController, AlertController } from '@ionic/angular'; 
+import { ActionSheetController, AlertController } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonListHeader, IonList, IonItem, IonThumbnail, IonSkeletonText, IonContent, IonHeader, IonTitle, IonToolbar, IonCard, IonFooter, IonCardContent, IonButton, IonCardHeader, IonCardTitle, IonCardSubtitle, IonIcon, IonLabel, IonImg, IonActionSheet } from '@ionic/angular/standalone';
@@ -9,8 +9,7 @@ import { CapacitorHttp, HttpResponse } from '@capacitor/core';
 import { from, Observable } from 'rxjs';
 import { delay, tap } from 'rxjs/operators';
 import { NavController } from '@ionic/angular/standalone';
-
-
+import { AuthService } from '../services/auth/auth.service';
 
 @Component({
   selector: 'app-citas',
@@ -23,16 +22,15 @@ export class CitasPage implements OnInit {
 
   users: any[] = [];
   date: string = '';
-
   perfil: any;
   public loaded: boolean = false;
   public ionContentList = [1, 2, 3, 4, 5, 6, 7, 8];
   private nav = inject(NavController);
- 
+  private authService = inject(AuthService);
 
   constructor(
     private actionSheetController: ActionSheetController,
-    private alertController: AlertController 
+    private alertController: AlertController
   ) {
     addIcons({ personCircleOutline });
   }
@@ -40,6 +38,7 @@ export class CitasPage implements OnInit {
   ngOnInit() {
     this.date = new Date().toLocaleDateString();
     this.cargarDatos().subscribe();
+    this.getPerfil();
   }
 
   // Cambiado el tipo de retorno a Observable<HttpResponse>
@@ -73,7 +72,7 @@ export class CitasPage implements OnInit {
       buttons: [
         {
           text: `${user.name}`,
-          icon: personCircleOutline,  
+          icon: personCircleOutline,
           handler: () => { }
         },
         {
@@ -117,8 +116,23 @@ export class CitasPage implements OnInit {
     await alert.present();
   }
 
- profile(){
-  this.nav.navigateForward('/perfil')
- }
+  profile() {
+    this.nav.navigateForward('/perfil')
+  }
 
+  getPerfil() {
+    this.authService.perfil()
+    .then((response) => {
+      if (response?.data?.success === 1){
+        this.perfil = response.data;
+      }else{
+        this.authService.showAlert(
+          'Su token de acceso ya no es valido, por favor inicie sesión nuevamente.'
+        );
+      }
+    })
+    .catch(e => {
+      this.authService.showAlert(e?.error?.message);
+    });
+  }
 }
