@@ -33,5 +33,13 @@ export const routes: Routes = [
     path: 'perfil',
     loadComponent: () => import('./perfil/perfil.page').then( m => m.PerfilPage)
   },
+  {
+    path: 'confirmar-correo',
+    loadComponent: () => import('./confirmar-correo/confirmar-correo.page').then( m => m.ConfirmarCorreoPage)
+  },
+  {
+    path: 'prueba',
+    loadComponent: () => import('./prueba/prueba.page').then( m => m.PruebaPage)
+  },
 
 ];
