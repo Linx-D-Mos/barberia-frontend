@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { CapacitorHttp } from '@capacitor/core';
 import { Preferences } from '@capacitor/preferences';
-import { AlertController, ToastController } from '@ionic/angular';
+import { AlertController, ToastController } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { alertCircle, warning } from 'ionicons/icons';
 import { BehaviorSubject } from 'rxjs';
