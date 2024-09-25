@@ -1,17 +1,39 @@
+ion-modal {
+  --height: 80%;
+  --width: 100vw;
+  --border-radius: 16px 16px 0 0;
+  --box-shadow: none;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 0;
+  overflow: hidden;
+  /* Evita el scroll dentro del modal */
+}
 
+ion-modal::part(backdrop) {
+  background: rgba(0, 0, 0, 0.0);
+  opacity: 0;
+  box-shadow: none;
+}
 
 .container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   text-align: center;
-  /* background-color: red; */
+  padding: 16px;
+  max-width: 100%;
+  box-sizing: border-box;
+  /* Permite el scroll interno solo si el contenido es demasiado largo */
 }
 
 .logo {
-  width: 240px;
-  height: 240px;
+  width: 50%;
+  max-width: 240px;
+  height: auto;
   margin: auto;
 }
 
@@ -19,26 +41,160 @@
 .email,
 .numero,
 .password,
-.confirmar{
-  padding-top: 5%;
+.confirmar {
+  width: 100%;
+  margin-bottom: 5%;
+}
+
+.datos {
+  padding-left: 5%;
+  padding-right: 5%;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.Siguiente {
+  background-color: gray; /* Color inicial */
+  width: 90%;
+  height: 4.5vh;
+  border-radius: 10px;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.Siguiente:active {
+  background-color: rgb(31, 12, 197);
 }
 
 
-.datos{
-  padding-left: 10%;
-  padding-right: 10%;
+.PrimeraParte {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background-color: #f5f5f5;
+}
+
+.PrimeraParte h3 {
+  font-size: clamp(1rem, 2vw + 1rem, 2.5rem);
+}
+
+.reenviar-codigo {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.reenviar-codigo:hover {
+  text-decoration: underline;
+}
+
+.opciones {
+  display: flex;
+  padding: 1.3%;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f5f5f5;
+  gap: 10px;
 }
 
 .button {
   width: 100%;
-  padding-top: 8%;
   text-transform: capitalize;
-  font-size: 23px;
-  --background: #b6b6b6;
-  padding-bottom: 8%;
+  font-size: 4vw;
+  --background: gray;
 }
 
 .back {
   padding-top: 6%;
   padding-left: 5%;
+}
+
+/* Media Queries para pantallas pequeñas */
+@media (max-width: 480px) {
+  ion-modal {
+    --height: 50%;
+    --width: 100vw;
+    --border-radius: 16px 16px 0 0;
+    /* Aumentamos la altura para asegurar más espacio en pantallas pequeñas */
+  }
+
+  .container {
+    padding: 8px;
+    /* Reduce el padding interno en pantallas pequeñas */
+  }
+
+  .logo {
+    width: 70%;
+    max-width: 140px;
+    /* Ajuste del logo para pantallas más pequeñas */
+  }
+
+  .button {
+    font-size: 5vw;
+    padding-top: 3%;
+    padding-bottom: 3%;
+  }
+
+  .usuario,
+  .email,
+  .numero,
+  .password,
+  .confirmar {
+    margin-bottom: 3%;
+    /* Reduce espacio entre los campos */
+  }
+
+  ion-input {
+    --padding-start: 10px;
+    --padding-end: 10px;
+  }
+}
+
+/* Media Queries para pantallas muy pequeñas (Moto G4) */
+@media (max-width: 360px) {
+  ion-modal {
+    --height: 60%;
+    /* Aumenta la altura del modal para pantallas muy pequeñas */
+  }
+
+  .container {
+    padding: 5px;
+    /* Reduce el padding interno */
+    overflow-y: auto;
+    /* Activa el scroll interno si el contenido es muy largo */
+  }
+
+  .logo {
+    width: 80%;
+    max-width: 120px;
+  }
+
+  .button {
+    font-size: 6vw;
+    padding-top: 2%;
+    padding-bottom: 2%;
+  }
+
+  .usuario,
+  .email,
+  .numero,
+  .password,
+  .confirmar {
+    margin-bottom: 2%;
+  }
+
+  ion-input {
+    --padding-start: 8px;
+    --padding-end: 8px;
+  }
+
+  .back {
+    padding-top: 3%;
+    /* Reduce espacio en pantallas muy pequeñas */
+  }
 }

@@ -1,24 +1,35 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { IonActionSheet, IonContent, IonHeader, IonTitle, IonToolbar, IonImg, IonInput, IonItem, IonTabButton, IonButton, IonBackButton, IonIcon } from '@ionic/angular/standalone';
-import { addIcons, } from 'ionicons';
+import { addIcons } from 'ionicons';
 import { arrowBack, arrowBackOutline } from 'ionicons/icons';
-import { NavController } from '@ionic/angular/standalone';
+import { NavController, IonicModule, ModalController } from '@ionic/angular'; // Importa solo IonicModule aquí
 import { AuthService } from '../services/auth/auth.service';
 import { RouterLink } from '@angular/router';
+import { VerificacionModalComponent } from '../verificar-correo-modal/verificar-correo-modal.component';
+import { InputOtpModule } from 'primeng/inputotp';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'app-registro',
   templateUrl: './registro.page.html',
   styleUrls: ['./registro.page.scss'],
   standalone: true,
-  imports: [IonActionSheet, RouterLink, IonIcon, IonBackButton, IonButton, IonTabButton, IonItem, IonInput, IonImg, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, ReactiveFormsModule]
+  imports: [
+    ButtonModule,
+    InputOtpModule,
+    IonicModule, // Solo necesitas IonicModule para los componentes de Ionic
+    RouterLink,
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule
+  ]
 })
 export class RegistroPage implements OnInit {
 
   private authService = inject(AuthService);
   regisForm: any;
+  email: any;
 
   constructor(private nav: NavController) {
     addIcons({ arrowBack, arrowBackOutline });
@@ -39,14 +50,14 @@ export class RegistroPage implements OnInit {
       ]),
       password_confirmation: new FormControl('', [Validators.required]),
     });
+    this.getEmail();
   }
 
   registrar() {
     this.authService.register(this.regisForm.value)
       .then((response) => {
         if (response?.data?.success === 1) {
-
-          this.authService.navigateByUrl('/barberias'); // Redirigir a la página correspondiente
+          this.authService.navigateByUrl('/barberias');
           this.regisForm.reset();
         } else {
           this.authService.showAlert(response?.data?.message);
@@ -57,31 +68,27 @@ export class RegistroPage implements OnInit {
       });
   }
 
-  public actionSheetButtons = [
-    {
-      text: 'Delete',
-      role: 'destructive',
-      data: {
-        action: 'delete',
-      },
-    },
-    {
-      text: 'Share',
-      data: {
-        action: 'share',
-      },
-    },
-    {
-      text: 'Cancel',
-      role: 'cancel',
-      data: {
-        action: 'cancel',
-      },
-    },
-  ];
-
-
   goBack() {
     this.nav.back();
+  }
+
+  resendCode() {
+    console.log('Reenviar código');
+  }
+
+  getEmail() {
+    this.authService.perfil()
+      .then((response) => {
+        if (response?.data?.success === 1) {
+          this.email = response.data;
+        } else {
+          this.authService.showAlert(
+            'Su token de acceso ya no es válido, por favor inicie sesión nuevamente.'
+          );
+        }
+      })
+      .catch(e => {
+        this.authService.showAlert(e?.error?.message);
+    });
   }
 }

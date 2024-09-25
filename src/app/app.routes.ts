@@ -25,7 +25,8 @@ export const routes: Routes = [
   {
     path: 'citas',
     loadComponent: () => import('./citas/citas.page').then(m => m.CitasPage),
-  },  {
+  },
+  {
     path: 'barberias',
     loadComponent: () => import('./barberias/barberias.page').then( m => m.BarberiasPage)
   },

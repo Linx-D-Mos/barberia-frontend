@@ -1,3 +1,14 @@
+:host {
+    --background: rgba(255, 255, 255, 0.9);
+    --border-radius: 10px; 
+
+    .modal-wrapper {
+        max-height: 80%; 
+        overflow-y: auto; 
+    }
+}
+
+
 .container {
     display: flex;
     justify-content: center;

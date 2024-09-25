@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Verificación de Correo</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismissModal()">Cerrar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="container">
+    <div class="PrimeraParte">
+      <h3>Ingresa el código de verificación enviado a tu correo</h3>
+      <p>{{email}}</p> <!-- Simplificado para mostrar directamente el email -->
+    </div>
+    <div class="SegundaParte">
+      <p-inputOtp [length]="6" style="gap: 4"></p-inputOtp>
+    </div>
+    <div class="opciones">
+      <ion-note>
+        ¿No has recibido el código?
+        <ion-text color="primary" class="reenviar-codigo" (click)="resendCode()">
+          Reenviar código
+        </ion-text>
+      </ion-note>
+      <ion-button class="Siguiente" style="width: 70%;" (click)="dismissModal()">Siguiente</ion-button>
+    </div>
+  </div>
+</ion-content>
