@@ -14,7 +14,7 @@ import { arrowBackOutline } from 'ionicons/icons';
 export class RecuperarPage implements OnInit {
 
   constructor (private nav : NavController) { 
-    addIcons({arrowBackOutline})
+    addIcons({arrowBackOutline});
   }
 
   ngOnInit() {
