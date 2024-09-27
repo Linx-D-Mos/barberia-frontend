@@ -126,3 +126,12 @@ ion-modal::part(backdrop) {
     }
 }
 
+ion-skeleton-text {
+  --border-radius: 9999px;
+}
+
+ion-thumbnail {
+  --size: 80px;
+  --border-radius: 14px;
+}
+

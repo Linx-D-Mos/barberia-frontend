@@ -53,7 +53,7 @@ export class RegistroPage implements OnInit {
       ]),
       password_confirmation: new FormControl('', [Validators.required]),
     });
-    this.getEmail();
+    // this.getEmail();
   }
 
   registrar() {
