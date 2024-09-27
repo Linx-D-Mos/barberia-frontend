@@ -1,8 +1,8 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'com.barbershopconnect.app',
-  appName: 'Barbershop Connect',
+  appId: 'com.barberconnect.app',
+  appName: 'Barber Connect',
   webDir: 'www',
   plugins: {
     PushNotifications: {
