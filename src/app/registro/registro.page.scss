@@ -1,34 +1,6 @@
-ion-modal {
-  --height: 80%;
-  --width: 100vw;
-  --border-radius: 16px 16px 0 0;
-  --box-shadow: none;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin: 0;
-  overflow: hidden;
-  /* Evita el scroll dentro del modal */
-}
 
-ion-modal::part(backdrop) {
-  background: rgba(0, 0, 0, 0.0);
-  opacity: 0;
-  box-shadow: none;
-}
 
-.container {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  text-align: center;
-  padding: 16px;
-  max-width: 100%;
-  box-sizing: border-box;
-  /* Permite el scroll interno solo si el contenido es demasiado largo */
-}
+
 
 .logo {
   width: 50%;
@@ -197,4 +169,6 @@ ion-modal::part(backdrop) {
     padding-top: 3%;
     /* Reduce espacio en pantallas muy pequeñas */
   }
+
 }
+

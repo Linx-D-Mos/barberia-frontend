@@ -74,3 +74,13 @@ ion-button {
     font-size: larger;
   }
 }
+
+.uneted {
+  ion-button {
+    margin-top: 3rem;
+    margin-bottom: .8rem;
+    --background: #606160;
+    font-size: larger;
+    margin-left: 10%;
+  }
+}

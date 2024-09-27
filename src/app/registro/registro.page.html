@@ -1,57 +1,67 @@
 <ion-content>
-  <ion-icon (click)="goBack()" class="back" size="large" name="arrow-back-outline"></ion-icon>
+  <ion-icon
+    (click)="goBack()"
+    class="back"
+    size="large"
+    name="arrow-back-outline"
+  ></ion-icon>
   <ion-img class="logo" src="assets/logo.webp"></ion-img>
   <form [formGroup]="regisForm">
     <div class="datos">
       <div class="usuario">
-        <ion-input formControlName="name" label="Nombre" label-placement="floating" fill="outline"
-          placeholder="Alex"></ion-input>
+        <ion-input
+          formControlName="name"
+          label="Nombre"
+          label-placement="floating"
+          fill="outline"
+          placeholder="Alex"
+        ></ion-input>
       </div>
       <div class="email">
-        <ion-input formControlName="email" type="Email" label="Email" label-placement="floating" fill="outline"
-          placeholder="ejemplo@gmail.com"></ion-input>
+        <ion-input
+          formControlName="email"
+          type="Email"
+          label="Email"
+          label-placement="floating"
+          fill="outline"
+          placeholder="ejemplo@gmail.com"
+        ></ion-input>
       </div>
       <div class="numero">
-        <ion-input formControlName="phone" type="tel" label="Numero Movil" label-placement="floating" fill="outline"
-          placeholder="312-999-2212"></ion-input>
+        <ion-input
+          formControlName="phone"
+          type="tel"
+          label="Numero Movil"
+          label-placement="floating"
+          fill="outline"
+          placeholder="312-999-2212"
+        ></ion-input>
       </div>
       <div class="password">
-        <ion-input formControlName="password" type="password" label="Contraseña" label-placement="floating"
-          fill="outline" placeholder="********"></ion-input>
+        <ion-input
+          formControlName="password"
+          type="password"
+          label="Contraseña"
+          label-placement="floating"
+          fill="outline"
+          placeholder="********"
+        ></ion-input>
       </div>
       <div class="confirmar">
-        <ion-input formControlName="password_confirmation" label="Confirmar contraseña" type="password"
-          label-placement="floating" fill="outline" placeholder="********"></ion-input>
+        <ion-input
+          formControlName="password_confirmation"
+          label="Confirmar contraseña"
+          type="password"
+          label-placement="floating"
+          fill="outline"
+          placeholder="********"
+        ></ion-input>
       </div>
-      <ion-button id="open-modal">Registrar</ion-button>
-      <ion-modal style="transform: translateY(42%);" #modal trigger="open-modal">
-        <ng-template>
-          <ion-content>
-            <div class="container">
-              <div class="PrimeraParte">
-                <h3>Ingresa el código de verificación enviado a tu correo</h3>
-                <p>{{email?.datum?.email}}</p>
-              </div>
-              <div class="SegundaParte">
-                <p-inputOtp [length]="6" style="gap: 4"></p-inputOtp>
-              </div>
-              <div class="opciones">
-                <ion-note>
-                  ¿No has recibido el código?
-                  <ion-text color="primary" class="reenviar-codigo" (click)="resendCode()">
-                    Reenviar código
-                  </ion-text>
-                </ion-note>
 
-                <button class="Siguiente">
-                  Siguiente
-                </button>
+      <ion-button>Registrar</ion-button>
 
-              </div>
-            </div>
-          </ion-content>
-        </ng-template>
-      </ion-modal>
+
     </div>
   </form>
+
 </ion-content>

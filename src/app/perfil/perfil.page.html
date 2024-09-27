@@ -3,7 +3,7 @@
     <div class="container">
       <ion-icon (click)="back()" name="arrow-back-outline" size="large" class="back"></ion-icon>
       <ion-label class="label">Perfil</ion-label>
-      <ion-icon class="account" name="person-circle-outline" size="large"></ion-icon>
+      <ion-icon class="save" name="save-outline" size="large"></ion-icon>
     </div>
   </ion-toolbar>
 </ion-header>
@@ -16,6 +16,58 @@
       <ion-title size="large">perfil</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <div class="account">
+
+    <ion-img class="profile-img" [src]="capturedImage || 'assets/account.png'" id="open-modal"></ion-img>
+  </div>
+
+  <div class="info">
+    <ion-label>Informacion <br>
+        personal</ion-label>
+    <ion-label>Historial</ion-label>
+  </div>
+
+  <div class="infoPersonal">
+    <ion-item>
+      <ion-label>
+        Nombre
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        Numero
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        Rol
+      </ion-label>
+    </ion-item>
+    
+  </div>
+
+  <ion-modal backdropDismiss="true" style="transform: translateY(42%)" #modal trigger="open-modal">
+    <ng-template>
+      <ion-content>
+        <div class="container">
+          <div class="img">
+            <ion-icon
+              class="camera"
+              (click)="takePicture()"
+              name="camera-outline"
+            ></ion-icon>
+
+            <ion-icon
+              class="galery"
+              (click)="openGallery()"
+              name="image-outline"
+            ></ion-icon>
+          </div>
+        </div>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
 
 
 

@@ -9,9 +9,9 @@
   justify-content: space-between; /* Distribuir el espacio entre los elementos */
  
 }
-.account{
-        width: 60px;
-        height: 60px;
+.save{
+        width: 45px;
+        height: 45px;
      }
 .back{
     
@@ -24,6 +24,91 @@
   flex-grow: 1; /* Permitir que el label ocupe el espacio disponible */
 }
 
+.account{
+  ion-icon{
+    width: 100px;
+    height: 100px;
+  }
+  padding-top: 20%;  
+    display: flex;
+    justify-content: center; /* Centrará el contenido horizontalmente */
+    align-items: center; 
+}
+
+.info{
+  font-size: 18px;
+  padding-top: 14%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-right: 20%;
+  padding-left: 16%;
+}
+
+.infoPersonal{
+  ion-label{
+    font-size: 18px;
+  }
+  padding-top: 14%;
+  padding-left: 9%;
+  padding-right: 9%;
+}
+
+ion-modal {
+  --height: 80%;
+  --width: 100vw;
+  --border-radius: 16px 16px 0 0;
+  --box-shadow: none;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 0;
+  overflow: hidden;
+  /* Evita el scroll dentro del modal */
+}
+
+ion-modal::part(backdrop) {
+  background: rgba(0, 0, 0, 0.0);
+  opacity: 0;
+  box-shadow: none;
+}
+
+.img{
+
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+  width: 100%; 
+  padding-left: 15%;
+  padding-right: 15%;
+  padding-top: 28%;
+
+
+ 
+ }
+ 
+  .camera{
+   width: 80px;
+   height: 80px;
+  }
+ 
+  .galery{
+   width: 80px;
+   height: 80px;
+  }
+ .foto{
+   width: 100px;
+   height: 100px;
+ }
+ 
+.profile-img{
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden; 
+
+} 
 
 
 
