@@ -1,0 +1,42 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <div class="container">
+      <ion-icon
+        (click)="back()"
+        name="arrow-back-outline"
+        size="large"
+        class="back"
+      ></ion-icon>
+      <ion-label class="label">Cambiar Estilo</ion-label>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">photoProfile</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="img">
+    <ion-img
+      routerLink="/photo-profile"
+      class="profile-img"
+      [src]="photo"
+    ></ion-img>
+
+    <div class="toggles">
+      <div class="foto">
+        <ion-label>Tomar Foto</ion-label>
+
+        <ion-icon class="camera" name="camera-outline" (click)="takePicture()"></ion-icon>
+      </div>
+      <div class="image">
+        <ion-label>Subir Foto</ion-label>
+        <ion-icon class="galery" name="image-outline" (click)="openGallery()"></ion-icon>
+
+      </div>
+    </div>
+  </div>
+</ion-content>

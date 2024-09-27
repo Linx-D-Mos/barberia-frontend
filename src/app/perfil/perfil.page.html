@@ -19,7 +19,7 @@
 
   <div class="account">
 
-    <ion-img class="profile-img" [src]="capturedImage || 'assets/account.png'" id="open-modal"></ion-img>
+    <ion-img routerLink="/photo-profile" class="profile-img" src=" assets/account.png"></ion-img>
   </div>
 
   <div class="info">
@@ -31,45 +31,50 @@
   <div class="infoPersonal">
     <ion-item>
       <ion-label>
-        Nombre
+        Nombre :
+      </ion-label>
+      <ion-label>
+        @if(loaded){
+          {{perfil?.datum?.name}}
+        }
+        @if(!loaded){
+          <p>
+            <ion-skeleton-text [animated]="true" style="width: 80%; height: 1em;;"></ion-skeleton-text>
+          </p>
+        }
       </ion-label>
     </ion-item>
     <ion-item>
       <ion-label>
-        Numero
+        Numero : 
+      </ion-label>
+      <ion-label>
+        @if(loaded){
+          {{perfil?.datum?.phone}}
+        }
+        @if(!loaded){
+          <p>
+            <ion-skeleton-text [animated]="true" style="width: 80%; height: 1em;;"></ion-skeleton-text>
+          </p>
+        }
       </ion-label>
     </ion-item>
     <ion-item>
       <ion-label>
-        Rol
+        Rol : 
+      </ion-label>
+      <ion-label>
+        Barbero
       </ion-label>
     </ion-item>
     
   </div>
 
-  <ion-modal backdropDismiss="true" style="transform: translateY(42%)" #modal trigger="open-modal">
-    <ng-template>
-      <ion-content>
-        <div class="container">
-          <div class="img">
-            <ion-icon
-              class="camera"
-              (click)="takePicture()"
-              name="camera-outline"
-            ></ion-icon>
-
-            <ion-icon
-              class="galery"
-              (click)="openGallery()"
-              name="image-outline"
-            ></ion-icon>
-          </div>
-        </div>
-      </ion-content>
-    </ng-template>
-  </ion-modal>
 
 
+<div class="button">
+  <ion-button (click)="logout()" class="out">Cerrar seccion</ion-button>
+</div>
 
   
 </ion-content>

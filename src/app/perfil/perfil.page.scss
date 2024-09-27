@@ -1,5 +1,4 @@
 .container {
-    padding-top: 3%;
     padding-left: 7%;
     padding-right: 7%;
     
@@ -47,11 +46,16 @@
 
 .infoPersonal{
   ion-label{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
     font-size: 18px;
   }
   padding-top: 14%;
-  padding-left: 9%;
-  padding-right: 9%;
+  ion-item{
+    padding-left: 10%;
+    padding-right: 10%;
+  }
 }
 
 ion-modal {
@@ -110,5 +114,15 @@ ion-modal::part(backdrop) {
 
 } 
 
+.button{
+  padding-top: 30%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .out{
+    width: 40%;
+    --background : red;
 
+    }
+}
 
