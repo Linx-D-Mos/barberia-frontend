@@ -5,8 +5,10 @@
       <p>{{email?.datum?.email}}</p>
     </div>
     <div class="SegundaParte">
-      <p-inputOtp [length]="6" style="gap: 4">
-      </p-inputOtp>
+      <form [formGroup]="verifyForm">
+        <p-inputOtp formControlName="code" [length]="6" style="gap: 4">
+        </p-inputOtp>
+      </form>
     </div>
     <div class="opciones">
       <ion-note>
@@ -15,8 +17,7 @@
           Reenviar código 
         </ion-text>
       </ion-note>
-      <!-- <p-button label="Resend Code" [link]="true"/> -->
-      <ion-button class="Siguiente" style="width: 70%;">Siguiente</ion-button>
+      <ion-button (click)="verificar()" class="Confirmar" color="medium" style="width: 70%;;">Siguiente</ion-button>
     </div>
   </div>
 </ion-content>

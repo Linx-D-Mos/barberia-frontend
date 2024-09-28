@@ -1,3 +1,6 @@
 <div *ngIf="!networkService.connected()" class="no-internet-banner">
   No hay conexión a internet
 </div>
+<div *ngIf="networkService.connected() class internet-banner">
+  Se ha restablecido la conexión a internet
+</div>

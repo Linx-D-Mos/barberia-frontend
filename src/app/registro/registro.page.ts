@@ -6,7 +6,6 @@ import { arrowBack, arrowBackOutline, cameraOutline, imageOutline } from 'ionico
 import { NavController, IonicModule, ModalController } from '@ionic/angular'; // Importa solo IonicModule aquí
 import { AuthService } from '../services/auth/auth.service';
 import { RouterLink } from '@angular/router';
-import { VerificacionModalComponent } from '../verificar-correo-modal/verificar-correo-modal.component';
 import { InputOtpModule } from 'primeng/inputotp';
 import { ButtonModule } from 'primeng/button';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
@@ -29,10 +28,10 @@ import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 export class RegistroPage implements OnInit {
 
   capturedImage: string | undefined;
+  email: any;
 
   private authService = inject(AuthService);
   regisForm: any;
-  email: any;
 
   constructor(private nav: NavController) {
     addIcons({ arrowBack, arrowBackOutline,cameraOutline , imageOutline});
@@ -60,7 +59,7 @@ export class RegistroPage implements OnInit {
     this.authService.register(this.regisForm.value)
       .then((response) => {
         if (response?.data?.success === 1) {
-          this.authService.navigateByUrl('/barberias');
+          this.authService.navigateByUrl('/confirmar-correo');
           this.regisForm.reset();
         } else {
           this.authService.showAlert(response?.data?.message);
@@ -146,8 +145,4 @@ export class RegistroPage implements OnInit {
     // Aquí obtendrás la imagen en formato base64
     this.capturedImage = image.webPath; // Usa webPath para mostrar la imagen
   }
-
-
-
- 
 }

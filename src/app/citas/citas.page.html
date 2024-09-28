@@ -1,54 +1,56 @@
 <ion-header>
-<ion-toolbar>
-  <div class="container">
-    <ion-img routerLink="/perfil" class="logo" src="assets/logo.webp"></ion-img>
-    <ion-label class="name">
-      Bienvenido @if(loaded){
-        {{perfil?.datum?.name}} !
-      }
-      @if(!loaded){
+  <ion-toolbar>
+    <div class="container">
+      <ion-img routerLink="/home" class="logo" src="assets/logo.webp"></ion-img>
+      <ion-label class="name">
+        Bienvenido <br>
+        @if(loaded){
+        {{perfil?.datum?.name}}
+        }
+        @if(!loaded){
         <p>
           <ion-skeleton-text [animated]="true" style="width: 80%; height: 1em;;"></ion-skeleton-text>
         </p>
-      }
-    </ion-label>
-    <ion-icon (click)="profile()" class="account" name="person-circle-outline"  size="large"></ion-icon>
-    
-  </div>
-</ion-toolbar>
+        }
+      </ion-label>
+      <ion-icon (click)="profile()" class="account" name="person-circle-outline" size="large"></ion-icon>
+
+    </div>
+  </ion-toolbar>
 
 </ion-header>
 <ion-content [fullscreen]="true">
- 
+
   @if(loaded) {
-    <!--lista de cards de citas pendientes-->
-    <ion-card class="cartas" *ngFor="let user of users">
-      <ion-card-header>
-        <ion-card-title>{{user.name}}</ion-card-title>
-        <ion-card-subtitle>Fecha: {{date}}</ion-card-subtitle>
-      </ion-card-header>
-      <ion-card-content class="card-content">
-        <ion-button  class="aceptar" (click)="presentActionSheet(user)">detalles</ion-button>
-      </ion-card-content>
-    </ion-card>
+  <!--lista de cards de citas pendientes-->
+  <ion-card class="cartas" *ngFor="let user of users">
+    <ion-card-header>
+      <ion-card-title>{{user.name}}</ion-card-title>
+      <ion-card-subtitle>Fecha: {{date}}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content class="card-content">
+      <ion-button class="aceptar" (click)="openShare()">detalles</ion-button>
+    </ion-card-content>
+  </ion-card>
   }
   @if(!loaded) {
-    @for(item of ionContentList; track $index){
-      <ion-list style="width: 100%; height: auto; padding: 4%;">
-        <ion-item>
-          <ion-label>
-            <h1>
-              <ion-skeleton-text [animated]="true" style="width: 50%; height: 1.3rem;"></ion-skeleton-text>
-            </h1>
-            <p>
-              <ion-skeleton-text [animated]="true" style="width: 30%; height: 1.1rem"></ion-skeleton-text>
-            </p>
-            <p>
-              <ion-skeleton-text [animated]="true" style="border-radius: 5px; width: 36%; height: 2.2rem; background-color: rgb(226, 226, 226); margin-left: 60%;"></ion-skeleton-text>
-            </p>
-          </ion-label>
-        </ion-item>
-      </ion-list>
-    }
+  @for(item of ionContentList; track $index){
+  <ion-list style="width: 100%; height: auto; padding: 4%;">
+    <ion-item>
+      <ion-label>
+        <h1>
+          <ion-skeleton-text [animated]="true" style="width: 50%; height: 1.3rem;"></ion-skeleton-text>
+        </h1>
+        <p>
+          <ion-skeleton-text [animated]="true" style="width: 30%; height: 1.1rem"></ion-skeleton-text>
+        </p>
+        <p>
+          <ion-skeleton-text [animated]="true"
+            style="border-radius: 5px; width: 36%; height: 2.2rem; background-color: rgb(226, 226, 226); margin-left: 60%;"></ion-skeleton-text>
+        </p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+  }
   }
 </ion-content>

@@ -4,13 +4,14 @@ import { FormsModule } from '@angular/forms';
 import { IonButton, IonNote, IonText, IonGrid, IonCol, IonRow, IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
 import { InputOtpModule } from 'primeng/inputotp';
 import { ButtonModule } from 'primeng/button';
+import { DetallesComponent } from '../components/detalles/detalles.component';
 
 @Component({
   selector: 'app-prueba',
   templateUrl: './prueba.page.html',
   styleUrls: ['./prueba.page.scss'],
   standalone: true,
-  imports: [ButtonModule, InputOtpModule,IonButton, IonText, IonNote, IonGrid, IonRow, IonCol, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [DetallesComponent, ButtonModule, InputOtpModule,IonButton, IonText, IonNote, IonGrid, IonRow, IonCol, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
 })
 export class PruebaPage implements OnInit {
   

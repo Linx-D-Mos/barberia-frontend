@@ -5,28 +5,29 @@ body {
 }
 
 .container {
-  
     padding-left: 4%;
     padding-right: 4%;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between; /* Distribuir el espacio entre los elementos */
-  ion-icon{
-    width: 80px;
-    height: 80px;
-  }
-  ion-img{
-    width: 100px;
-    height: 100px;
-  }
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* Distribuir el espacio entre los elementos */
+    ion-icon {
+        width: 80px;
+        height: 80px;
+    }
+    ion-img {
+        width: 100px;
+        height: 100px;
+    }
 }
 
 .name {
- 
     font-size: 17px;
-  text-align: center; /* Centrar el texto */
-  flex-grow: 1; /* Permitir que el label ocupe el espacio disponible */
+    text-align: center;
+    /* Centrar el texto */
+    flex-grow: 1;
+    /* Permitir que el label ocupe el espacio disponible */
 }
 
 ion-skeleton-text {
@@ -55,27 +56,4 @@ ion-skeleton-text {
     font-style: normal;
     text-transform: capitalize;
     --background: #2C2C2C;
-}
-
-/* citas.page.css */
-.custom-action-sheet .action-sheet-header {
-    font-size: 18px;
-    font-weight: bold;
-}
-
-.custom-action-sheet .action-sheet-button {
-    font-size: 16px;
-}
-
-.custom-action-sheet .action-sheet-content {
-    padding: 10px;
-}
-
-.custom-action-sheet .action-sheet-button {
-    display: flex;
-    align-items: center;
-}
-
-.custom-action-sheet .action-sheet-button ion-icon {
-    margin-right: 10px;
 }

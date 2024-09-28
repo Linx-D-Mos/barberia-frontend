@@ -1,22 +1,28 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { ActionSheetController, AlertController } from '@ionic/angular';
+import { ActionSheetController, AlertController, ModalController, NavController } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonListHeader, IonList, IonItem, IonThumbnail, IonSkeletonText, IonContent, IonHeader, IonTitle, IonToolbar, IonCard, IonFooter, IonCardContent, IonButton, IonCardHeader, IonCardTitle, IonCardSubtitle, IonIcon, IonLabel, IonImg, IonActionSheet } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { personCircleOutline } from 'ionicons/icons';
 import { CapacitorHttp, HttpResponse } from '@capacitor/core';
 import { from, Observable } from 'rxjs';
 import { delay, tap } from 'rxjs/operators';
-import { NavController } from '@ionic/angular/standalone';
 import { AuthService } from '../services/auth/auth.service';
+import { DetallesComponent } from '../components/detalles/detalles.component';
+
+// Importar módulos de Ionic necesarios
+import { IonicModule } from '@ionic/angular';
 
 @Component({
   selector: 'app-citas',
   templateUrl: './citas.page.html',
   styleUrls: ['./citas.page.scss'],
   standalone: true,
-  imports: [IonActionSheet, IonListHeader, IonList, IonItem, IonThumbnail, IonSkeletonText, IonImg, IonLabel, IonIcon, IonCardSubtitle, IonCardTitle, IonCardHeader, IonButton, IonCardContent, IonFooter, IonCard, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonicModule // Agregamos IonicModule para acceder a los componentes de Ionic
+  ]
 })
 export class CitasPage implements OnInit {
 
@@ -30,7 +36,8 @@ export class CitasPage implements OnInit {
 
   constructor(
     private actionSheetController: ActionSheetController,
-    private alertController: AlertController
+    private alertController: AlertController,
+    public modalController: ModalController
   ) {
     addIcons({ personCircleOutline });
   }
@@ -41,18 +48,34 @@ export class CitasPage implements OnInit {
     this.getPerfil();
   }
 
-  // Cambiado el tipo de retorno a Observable<HttpResponse>
+  async openShare() {
+    const modal = await this.modalController.create({
+      component: DetallesComponent,
+      initialBreakpoint: 1,
+      breakpoints: [0, 1],
+      cssClass: 'my-custom-class',
+    });
+    modal.onDidDismiss().then(() => {
+      this.closeShare(modal); // Llama a la función de cerrar modal
+  });
+    return await modal.present();
+  }
+
+  async closeShare(modal: HTMLIonModalElement) {
+    await modal.dismiss(); // Cierra el modal
+}
+
+
   cargarDatos(): Observable<HttpResponse> {
     const datos = {
       url: 'https://jsonplaceholder.typicode.com/users'
     };
 
-    // Convierte la promesa de CapacitorHttp.get en un observable usando from()
     return from(CapacitorHttp.get(datos)).pipe(
-      delay(3000), // Simulamos un retraso de 2 segundos
+      delay(3000),
       tap((response: HttpResponse) => {
-        this.users = response.data; // Asignamos los datos a la propiedad users
-        this.loaded = true; // Cambia el estado de `loaded`
+        this.users = response.data;
+        this.loaded = true;
       })
     );
   }
@@ -64,75 +87,23 @@ export class CitasPage implements OnInit {
     return { date, time };
   }
 
-  public async presentActionSheet(user: any) {
-    const { date, time } = this.getCurrentDateTime();
-    const actionSheet = await this.actionSheetController.create({
-      header: 'Detalles de la cita',
-      cssClass: 'custom-action-sheet',
-      buttons: [
-        {
-          text: `${user.name}`,
-          icon: personCircleOutline,
-          handler: () => { }
-        },
-        {
-          text: `Fecha: ${date}`,
-          handler: () => { }
-        },
-        {
-          text: `Hora: ${time}`,
-          handler: () => { }
-        },
-        {
-          text: `Servicio: Consulta`,
-          handler: () => { }
-        },
-        {
-          text: 'Aceptar',
-          role: 'accept',
-          handler: () => {
-            this.showAlert('Cita aceptada', 'Has aceptado la cita.');
-          }
-        },
-        {
-          text: 'Rechazar',
-          role: 'reject',
-          handler: () => {
-            this.showAlert('Cita rechazada', '¿Estas seguro?');
-          }
-        }
-      ]
-    });
-    await actionSheet.present();
-  }
-
-  async showAlert(header: string, message: string) {
-    const alert = await this.alertController.create({
-      header: header,
-      message: message,
-      buttons: ['Si']
-    });
-
-    await alert.present();
-  }
-
   profile() {
-    this.nav.navigateForward('/perfil')
+    this.nav.navigateForward('/perfil');
   }
 
   getPerfil() {
     this.authService.perfil()
-    .then((response) => {
-      if (response?.data?.success === 1){
-        this.perfil = response.data;
-      }else{
-        this.authService.showAlert(
-          'Su token de acceso ya no es valido, por favor inicie sesión nuevamente.'
-        );
-      }
-    })
-    .catch(e => {
-      this.authService.showAlert(e?.error?.message);
-    });
+      .then((response) => {
+        if (response?.data?.success === 1) {
+          this.perfil = response.data;
+        } else {
+          this.authService.showAlert(
+            'Su token de acceso ya no es valido, por favor inicie sesión nuevamente.'
+          );
+        }
+      })
+      .catch(e => {
+        this.authService.showAlert(e?.error?.message);
+      });
   }
 }
