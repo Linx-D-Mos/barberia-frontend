@@ -1,4 +1,4 @@
-<app-no-internet-banner></app-no-internet-banner>
-<ion-app [ngStyle]="{'margin-top': !isConnected ? '2rem' : '0'}">
+<app-no-internet-banner/>
+<ion-app [ngStyle]="{'margin-top': !networkService.connected() ? '1.5rem' : '0'}">
   <ion-router-outlet></ion-router-outlet>
 </ion-app>

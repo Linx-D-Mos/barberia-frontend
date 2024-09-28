@@ -1,6 +1,8 @@
 <div *ngIf="!networkService.connected()" class="no-internet-banner">
-  No hay conexión a internet
+  <ion-icon slot="start" name="cloud-offline-outline"></ion-icon>
+  <ion-label>¡Oh no! Sin internet</ion-label>
 </div>
-<div *ngIf="networkService.connected() class internet-banner">
-  Se ha restablecido la conexión a internet
+<div *ngIf="showInternetBanner || networkService.connected()" class="internet-banner">
+  <ion-icon slot="start" name="cloud-outline"></ion-icon>
+  <ion-label>¡Genial! Conexión restablecida</ion-label>
 </div>

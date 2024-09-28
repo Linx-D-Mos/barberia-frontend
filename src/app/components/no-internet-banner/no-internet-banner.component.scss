@@ -1,23 +1,37 @@
-.no-internet-banner {
-    background-color: orange;
+.no-internet-banner, .internet-banner {
     color: white;
     text-align: center;
-    padding: 10px;
+    justify-content: center;
+    display: flex;
+    padding: 5px;
     position: fixed;
+    margin: 0;
     top: 0;
     left: 0;
     right: 0;
     z-index: 9999;
+
+    ion-icon {
+        font-size: 20px;
+        margin-right: 10px;
+    }
 }
 
 .no-internet-banner {
+    background-color: rgb(235, 48, 48);
+}
+
+.internet-banner {
     background-color: rgb(79, 235, 48);
-    color: white;
-    text-align: center;
-    padding: 10px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 9999;
+    animation: fadeOut 6s forwards;
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
 }
