@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { RouterModule, RouterOutlet } from '@angular/router';
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonItem, IonInput, IonImg, IonButton, IonBackButton, IonTabButton, IonLabel, NavController, IonSpinner, IonInputPasswordToggle, IonToast } from '@ionic/angular/standalone';
+import { IonHeader, IonToolbar, IonTitle, IonContent, IonItem, IonInput, IonImg, IonButton, IonBackButton, IonTabButton, IonLabel, NavController, IonSpinner, IonInputPasswordToggle, IonToast, IonIcon } from '@ionic/angular/standalone';
 import { ReactiveFormsModule, FormGroup, Validators, FormControl } from '@angular/forms';
 import { AuthService } from '../services/auth/auth.service'; // Asegúrate de que la ruta sea correcta
 
@@ -9,7 +9,7 @@ import { AuthService } from '../services/auth/auth.service'; // Asegúrate de qu
   templateUrl: 'login.page.html',
   styleUrls: ['login.page.scss'],
   standalone: true,
-  imports: [IonToast, IonInputPasswordToggle, IonSpinner, ReactiveFormsModule, IonLabel, IonTabButton, IonBackButton, IonButton, IonImg, IonInput, IonItem, IonHeader, IonToolbar, IonTitle, IonContent, RouterModule, RouterOutlet],
+  imports: [IonIcon, IonToast, IonInputPasswordToggle, IonSpinner, ReactiveFormsModule, IonLabel, IonTabButton, IonBackButton, IonButton, IonImg, IonInput, IonItem, IonHeader, IonToolbar, IonTitle, IonContent, RouterModule, RouterOutlet],
 })
 export class LoginPage implements OnInit {
 

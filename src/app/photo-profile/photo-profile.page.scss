@@ -1,48 +1,53 @@
 .container {
-    margin-top: 3%;
-    padding-left: 6%;
-    padding-right: 8%;
-    
+  padding-left: 6%;
+  padding-right: 8%;
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-between; /* Distribuir el espacio entre los elementos */
-  ion-label{
+  justify-content: space-between;
+
+  /* Distribuir el espacio entre los elementos */
+  ion-label {
     flex-grow: 1;
     text-align: center;
     font-size: 23px;
   }
- 
-}
-.img{
-  padding-top: 40%;
+
+  .back {
+    text-align: center;
+  }
 }
 
-.profile-img{
+.img {
+  padding-top: 40%;
+  border-radius: 100%;
+}
+
+.profile-img {
   width: 250px;
   height: 250px;
   margin: auto;
-  
 }
 
-.toggles{
+.toggles {
   .camera,
-  .galery{
+  .galery {
     width: 80px;
     height: 80px;
   }
+
   .foto,
-  .image{
+  .image {
     align-items: center;
     font-size: 19px;
     display: flex;
     flex-direction: column;
   }
+
   padding-top: 24%;
   padding-left: 15%;
   padding-right: 15%;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;   
-  
+  justify-content: space-between;
 }

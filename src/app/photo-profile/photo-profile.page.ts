@@ -8,6 +8,8 @@ import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { AuthService } from '../services/auth/auth.service';
 
 import { PhotoService } from '../services/photo/photo.service';
+import { ClientService } from '../services/client/client.service';
+import { Profile } from '../interfaces/client/interfaces';
 @Component({
   selector: 'app-photo-profile',
   templateUrl: './photo-profile.page.html',
@@ -22,6 +24,11 @@ export class PhotoProfilePage implements OnInit {
 
   #photoService = inject(PhotoService);
   private authService = inject(AuthService);
+  profile!: Profile;
+  #clientService = inject(ClientService);
+  public loaded: boolean = false;
+
+
 
 
   constructor() {
@@ -29,6 +36,7 @@ export class PhotoProfilePage implements OnInit {
    }
 
   ngOnInit() {
+    this.getProfile();
     Camera.requestPermissions();
   }
 
@@ -121,6 +129,30 @@ export class PhotoProfilePage implements OnInit {
     } catch (error) {
       console.error('Error al tomar la foto', error);
     }
+  }
+
+  getProfile() {
+    this.#clientService.profile()
+    .then((response) => {
+      // Asignando los datos del perfil
+      this.profile = response.data;
+      if (this.profile.success === 1){
+        this.loaded =  true;
+      }else{
+        this.authService.showToast('No se encontraron datos.');
+        this.authService.navigateByUrl('/login');
+      }
+      // capturando errores
+      if (response?.status === 403) {
+        this.authService.showToast('No tienes permisos para realizar esta acción.');
+        this.authService.navigateByUrl('/login');
+      }
+
+      if (response?.status === 500) {
+        this.authService.showToast('Error en el servidor, inicie sesión nuevamente.');
+        this.authService.navigateByUrl('/login');
+      }
+    })
   }
 
 

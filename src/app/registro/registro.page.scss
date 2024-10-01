@@ -27,10 +27,21 @@
 }
 
 .datos {
-  padding-left: 5%;
-  padding-right: 5%;
+ margin-top: 10%;
   box-sizing: border-box;
   width: 100%;
+  ion-input{
+    width: 80%;
+  max-width: 20rem;
+  margin: auto ;
+  margin-top: 6%;
+  }
+  .submit{
+    width: 75%;
+    margin: auto ;
+    display: block;
+    padding-top: 7%;
+  }
 }
 
 .Siguiente {

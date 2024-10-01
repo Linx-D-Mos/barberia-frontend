@@ -40,11 +40,11 @@
       </ion-label>
       <ion-label>
         @if(loaded){
-          {{perfil?.datum?.name}}
+          {{profile.data.user.name}}
         }
         @if(!loaded){
           <p>
-            <ion-skeleton-text [animated]="true" style="width: 80%; height: 1em;;"></ion-skeleton-text>
+            <ion-skeleton-text [animated]="true" style="width: 80%; height: 1em;"></ion-skeleton-text>
           </p>
         }
       </ion-label>
@@ -55,11 +55,11 @@
       </ion-label>
       <ion-label>
         @if(loaded){
-          {{perfil?.datum?.phone}}
+          {{profile.data.user.phone}}
         }
         @if(!loaded){
           <p>
-            <ion-skeleton-text [animated]="true" style="width: 80%; height: 1em;;"></ion-skeleton-text>
+            <ion-skeleton-text [animated]="true" style="width: 80%; height: 1em;"></ion-skeleton-text>
           </p>
         }
       </ion-label>

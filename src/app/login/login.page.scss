@@ -22,7 +22,12 @@ ion-img {
 ion-input {
   width: 80%;
   max-width: 20rem;
-  margin: 1.5rem auto;
+  display: block;
+  margin-top: 4%;
+  margin: auto;
+}
+.con{
+  margin-top: 1.5rem;
 }
 
 ion-button {
@@ -52,6 +57,7 @@ ion-button {
 
 .iniciemos {
   ion-button {
+    margin-top: 1.5rem;
     height: 3rem;
     margin-bottom: 1.3rem;
     --background: #b6b6b6;
@@ -68,19 +74,28 @@ ion-button {
 
 .unete {
   ion-button {
-    margin-top: 3rem;
+    margin-top: 6%;
     margin-bottom: .8rem;
     --background: #606160;
     font-size: larger;
   }
 }
 
-.uneted {
-  ion-button {
-    margin-top: 3rem;
-    margin-bottom: .8rem;
-    --background: #606160;
-    font-size: larger;
-    margin-left: 10%;
+
+.seccion{
+  padding-top: 5%;
+  display: flex;
+  justify-content: center;
+  font-size: 20px;
+}
+.apps{
+  padding-top: 4%;
+  display: flex;
+  justify-content: space-between;
+  ion-img{
+    width: 35px;
+    height: 35px;
   }
+  padding-left: 27%;
+  padding-right: 27%;
 }
