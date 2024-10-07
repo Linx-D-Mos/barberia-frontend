@@ -8,6 +8,9 @@
   justify-content: space-between; /* Distribuir el espacio entre los elementos */
  
 }
+.content{
+  padding-top: 8%;
+}
 .save{
         width: 45px;
         height: 45px;
@@ -24,11 +27,13 @@
 }
 
 .account{
-  ion-icon{
-    width: 100px;
-    height: 100px;
-  }
-  padding-top: 20%;  
+  .profile-img{
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    overflow: hidden; 
+  
+  }   
     display: flex;
     justify-content: center; /* Centrará el contenido horizontalmente */
     align-items: center; 
@@ -106,21 +111,15 @@ ion-modal::part(backdrop) {
    height: 100px;
  }
  
-.profile-img{
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  overflow: hidden; 
 
-} 
 
 .button{
-  padding-top: 30%;
+  padding-top: 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   .out{
-    width: 40%;
+    width: 45%;
     --background : red;
 
     }

@@ -13,10 +13,11 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">perfil</ion-title>
+     Perfil
     </ion-toolbar>
   </ion-header>
-
+<div class="content">
+  
   <div class="account">
     @if (loaded) {
       <ion-img routerLink="/photo-profile" class="profile-img" [src]="profile.data.user.photo"></ion-img>
@@ -72,14 +73,15 @@
         Barbero
       </ion-label>
     </ion-item>
-    
+    <div class="button">
+      <ion-button (click)="logout()" class="out">Cerrar seccion</ion-button>
+    </div>
   </div>
-
-
-
-<div class="button">
-  <ion-button (click)="logout()" class="out">Cerrar seccion</ion-button>
 </div>
+
+
+
+
 
   
 </ion-content>
