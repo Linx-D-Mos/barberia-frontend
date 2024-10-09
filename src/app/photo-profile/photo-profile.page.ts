@@ -104,30 +104,35 @@ export class PhotoProfilePage implements OnInit {
   async takePicture() {
     try {
       const image = await Camera.getPhoto({
-        quality: 100,
+        quality: 90,
         allowEditing: true,
         resultType: CameraResultType.Base64,
         source: CameraSource.Camera,
       });
 
       if (image.base64String) {
-        await this.#photoService.uploadPhoto(image.base64String)
+        await this.#photoService.uploadPhoto1(image)
         .then((response) => {
           if (response?.data?.success === 1) {
             this.authService.showToast(response?.data?.message);
+            this.authService.showToast('Foto subida con éxito.');
           } else {
             this.authService.showToast(response?.data?.message);
             this.authService.showToast(response?.data?.errors?.photo);
+            this.authService.showToast('No se pudo subir la foto. Success: ' + response?.data?.success);
           }
         })
         .catch((e) => {
           this.authService.showToast(e?.error?.message);
+          this.authService.showToast('Error al subir la foto.');
         });
       } else {
         console.error('No se pudo obtener la imagen en formato Base64');
+        this.authService.showToast('No se pudo obtener la imagen en formato Base64');
       }
     } catch (error) {
-      console.error('Error al tomar la foto', error);
+      console.error('Error al tomar la foto: ', error);
+      this.authService.showToast(`Error al tomar la foto: ${error}`);
     }
   }
 

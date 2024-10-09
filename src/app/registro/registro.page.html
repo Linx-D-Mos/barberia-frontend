@@ -1,66 +1,101 @@
 <ion-content>
-  <ion-icon
-    (click)="goBack()"
-    class="back"
+  <!-- Boton Retroceso -->
+  <ion-button
     size="large"
-    name="arrow-back-outline"
-  ></ion-icon>
-  <ion-img class="logo" src="assets/logo.webp"></ion-img>
-  <form [formGroup]="regisForm">
-    <div class="datos">
-      <div class="usuario">
+    fill="clear"
+    shape="round"
+    slot="fixed"
+    [routerLink]="['../login']"
+  >
+    <ion-icon slot="icon-only" name="arrow-back" />
+  </ion-button>
+  <div class="content">
+    <div class="secundario">
+      <!-- Logo -->
+      <ion-img src="assets/logo.webp" alt="logo" />
+
+      <!-- Formulario -->
+      <form [formGroup]="regisForm">
+        <!-- Nombre Completo -->
         <ion-input
           formControlName="name"
-          label="Nombre"
-          label-placement="floating"
-          fill="outline"
+          type="text"
+          label="Nombre Completo"
           placeholder="Alex"
-        ></ion-input>
-      </div>
-      <div class="email">
+          labelPlacement="floating"
+          fill="outline"
+        />
+
+        <!-- Email -->
         <ion-input
           formControlName="email"
-          type="Email"
+          type="email"
           label="Email"
-          label-placement="floating"
-          fill="outline"
           placeholder="ejemplo@gmail.com"
-        ></ion-input>
-      </div>
-      <div class="numero">
+          labelPlacement="floating"
+          fill="outline"
+
+        />
+
+        <!-- WhatsApp -->
         <ion-input
           formControlName="phone"
           type="tel"
-          label="Numero Movil"
-          label-placement="floating"
+          label="WhatsApp"
+          placeholder="3129992212"
+          labelPlacement="floating"
           fill="outline"
-          placeholder="312-999-2212"
-        ></ion-input>
-      </div>
-      <div class="password">
+          maxlength="10"
+        />
+
+        <!-- Contraseña -->
         <ion-input
           formControlName="password"
           type="password"
           label="Contraseña"
-          clearOnEdit="false"
+          placeholder="********"
           label-placement="floating"
           fill="outline"
-          placeholder="********"
-        ></ion-input>
-      </div>
-      <div class="confirmar">
+          clearOnEdit="false"
+          (ionInput)="onInput($event)"
+        >
+          <!-- Si la contraseña tiene un valor entonces se muestra el botón para que pueda hacerla visible -->
+          @if (pass) {
+            <ion-input-password-toggle color="medium" slot="end" />
+          }
+        </ion-input>
+
+        <!-- Confirmar Contraseña -->
         <ion-input
           formControlName="password_confirmation"
-          label="Confirmar contraseña"
           type="password"
-          clearOnEdit="false"
-          label-placement="floating"
-          fill="outline"
+          label="Confirmar contraseña"
           placeholder="********"
-        ></ion-input>
-      </div>
-      <ion-button class="submit" (click)="registrar()">Registrar</ion-button>
-    </div>
-  </form>
+          labelPlacement="floating"
+          fill="outline"
+          clearOnEdit="false"
+          (ionInput)="onInputConfirm($event)"
+        >
+          <!-- Si la contraseña tiene un valor entonces se muestra el botón para que pueda hacerla visible -->
+          @if (pass_confirm) {
+            <ion-input-password-toggle color="medium" slot="end" />
+          }
+        </ion-input>
+      </form>
 
+      <!-- Si el usuario presiona el botón de "Registrar", se activa el boton cargando, de lo contrario se muestra el botón "Registrar" -->
+      <!-- Registrar -->
+      <div class="registar">
+        @if (isRegister) {
+          <ion-button>
+            <ion-spinner name="lines-small" />
+          </ion-button>
+        }@else {
+          <ion-button [disabled]="regisForm.invalid" (click)="registrar()">
+            Registrar
+          </ion-button>
+        }
+      </div>
+    </div>
+  </div>
 </ion-content>

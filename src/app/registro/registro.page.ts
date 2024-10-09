@@ -1,14 +1,22 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  ValidationErrors,
+  ValidatorFn,
+  Validators,
+} from '@angular/forms';
 import { addIcons } from 'ionicons';
-import { arrowBack, arrowBackOutline, cameraOutline, imageOutline } from 'ionicons/icons';
-import { NavController, IonicModule, ModalController } from '@ionic/angular'; // Importa solo IonicModule aquí
+import { arrowBack } from 'ionicons/icons';
+import { IonicModule } from '@ionic/angular'; // Importa solo IonicModule aquí
 import { AuthService } from '../services/auth/auth.service';
 import { RouterLink } from '@angular/router';
 import { InputOtpModule } from 'primeng/inputotp';
 import { ButtonModule } from 'primeng/button';
-import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 
 @Component({
   selector: 'app-registro',
@@ -22,19 +30,48 @@ import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
     RouterLink,
     CommonModule,
     FormsModule,
-    ReactiveFormsModule
-  ]
+    ReactiveFormsModule,
+  ],
 })
 export class RegistroPage implements OnInit {
+  /* *************************************** INYECCIONES *************************************** */
 
-  capturedImage: string | undefined;
-  email: any;
-
+  /**
+   * Servicio de autenticación inyectado.
+   *
+   * @private
+   * @type {AuthService}
+   */
   private authService = inject(AuthService);
-  regisForm: any;
 
-  constructor(private nav: NavController) {
-    addIcons({ arrowBack, arrowBackOutline,cameraOutline , imageOutline});
+  /* ********************************** FIN DE LAS INYECCIONES ********************************** */
+
+  /* **************************************** VARIABLES **************************************** */
+
+  /**
+   * Variable para almacenar el formulario de registro
+   */
+  regisForm!: FormGroup;
+
+  /**
+   * Variable para almacenar la contraseña
+   */
+  pass: any;
+
+  /**
+   * Variable para almacenar la confirmación de la contraseña
+   */
+  pass_confirm: any;
+
+  /**
+   * Variable para saber si se está registrando
+   */
+  isRegister = false;
+
+  /* ************************************* FIN DE VARIABLES ************************************* */
+
+  constructor() {
+    addIcons({ arrowBack });
   }
 
   ngOnInit() {
@@ -47,102 +84,100 @@ export class RegistroPage implements OnInit {
       ]),
       password: new FormControl('', [
         Validators.required,
-        Validators.minLength(8),
-        Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/),
+        Validators.minLength(12),
+        createPasswordStrengthValidator(),
       ]),
-      password_confirmation: new FormControl('', [Validators.required]),
+      password_confirmation: new FormControl('', [
+        Validators.required,
+        passwordMatchValidator('password'),
+      ]),
     });
     // this.getEmail();
   }
 
   registrar() {
-    this.authService.register(this.regisForm.value)
+    this.isRegister = true;
+
+    this.authService
+      .register(this.regisForm.value)
       .then((response) => {
         if (response?.data?.success === 1) {
           this.authService.navigateByUrl('/confirmar-correo');
+          this.isRegister = false;
           this.regisForm.reset();
         } else {
-          this.authService.showAlert(response?.data?.message);
+          this.isRegister = false;
+          this.authService.showToast(response?.data?.message);
         }
       })
-      .catch(e => {
-        this.authService.showAlert(e?.error?.message);
+      .catch((e) => {
+        this.isRegister = false;
+        this.authService.showToast(e?.error?.message);
       });
   }
 
-  goBack() {
-    this.nav.back();
+  /**
+   * Función para obtener el valor del input de la contraseña
+   * @param ev
+   */
+  onInput(ev: any) {
+    this.pass = ev.target!.value;
   }
 
-  resendCode() {
-    console.log('Reenviar código');
+  /**
+   * Función para obtener el valor del input de la confirmación de la contraseña
+   * @param ev
+   */
+  onInputConfirm(ev: any) {
+    this.pass_confirm = ev.target!.value;
   }
+}
 
-  getEmail() {
-    this.authService.perfil()
-      .then((response) => {
-        if (response?.data?.success === 1) {
-          this.email = response.data;
-        } else {
-          this.authService.showAlert(
-            'Su token de acceso ya no es válido, por favor inicie sesión nuevamente.'
-          );
-        }
-      })
-      .catch(e => {
-        this.authService.showAlert(e?.error?.message);
-    });
-  }
+/**
+ * Validador personalizado para verificar si el valor de un control coincide con el valor de otro control.
+ *
+ * @param matchTo - El nombre del control con el que se debe comparar el valor.
+ * @returns Una función de validador que devuelve un objeto de errores de validación si los valores no coinciden, o null si coinciden.
+ */
+export function passwordMatchValidator(matchTo: string): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    const password = control.parent?.get(matchTo);
 
-  async takePicture() {
-    const image = await Camera.getPhoto({
-      quality: 90,
-      allowEditing: false,
-      resultType: CameraResultType.Uri, // Puedes usar Base64 o URI
-      source: CameraSource.Camera, // O usa CameraSource.Photos para la galería
-    });
+    if (password && control.value !== password.value) {
+      return { passwordMismatch: true };
+    }
 
-    // Aquí obtendrás la imagen en formato base64
-    this.capturedImage = image.webPath; // Usa webPath para mostrar la imagen
-  }
+    return null;
+  };
+}
 
-  async selectPicture() {
-    const image = await Camera.getPhoto({
-      quality: 90,
-      allowEditing: false,
-      resultType: CameraResultType.Uri, // Puedes usar Base64 o URI
-      source: CameraSource.Camera, // O usa CameraSource.Photos para la galería
-    });
+/**
+ * Crea un validador de fuerza de contraseña.
+ *
+ * Este validador verifica si una contraseña cumple con los siguientes criterios:
+ * - Contiene al menos una letra mayúscula.
+ * - Contiene al menos una letra minúscula.
+ * - Contiene al menos un número.
+ * - Contiene al menos un carácter especial.
+ *
+ * @returns {ValidatorFn} Una función de validador que toma un control y devuelve un objeto de errores de validación o null.
+ */
+export function createPasswordStrengthValidator(): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    const value = control.value;
 
-       // Subir la imagen al servidor
-    //this.capturedImage = image.dataUrl;
-    //const formData = new FormData();
-    //formData.append('file', this.dataURItoBlob(this.capturedImage), 'image.jpeg');
+    if (!value) {
+      return null;
+    }
 
-    //this.http.post('https://tu-servidor.com/upload', formData).subscribe(
-     // (response) => {
-      //  console.log('Imagen subida con éxito');
-     // },
-      //(error) => {
-      //  console.log('Error al subir la imagen:', error);
-     // }
-   // );
+    const hasUpperCase = /[A-Z]+/.test(value);
+    const hasLowerCase = /[a-z]+/.test(value);
+    const hasNumeric = /[0-9]+/.test(value);
+    const hasSpecialChar = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(value);
 
-    // Convertir Base64 a Blob
-  //dataURItoBlob(dataURI: string) {
-    //const byteString = atob(dataURI.split(',')[1]);
-    //const mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
-    //const ab = new ArrayBuffer(byteString.length);
-    //const ia = new Uint8Array(ab);
+    const passwordValid =
+      hasUpperCase && hasLowerCase && hasNumeric && hasSpecialChar;
 
-    //for (let i = 0; i < byteString.length; i++) {
-      //ia[i] = byteString.charCodeAt(i);
-    //}
-
-  //  return new Blob([ab], { type: mimeString });
-  //}
-
-    // Aquí obtendrás la imagen en formato base64
-    this.capturedImage = image.webPath; // Usa webPath para mostrar la imagen
-  }
+    return !passwordValid ? { passwordStrength: true } : null;
+  };
 }

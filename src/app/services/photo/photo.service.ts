@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+import { Camera, CameraResultType, CameraSource, Photo } from '@capacitor/camera';
 import { CapacitorHttp } from '@capacitor/core';
 import { environment } from 'src/environments/environment.prod';
 import { AuthService } from '../auth/auth.service';
@@ -17,6 +17,36 @@ export class PhotoService {
    * @returns {Promise<any>} - Una promesa que se resuelve con la respuesta del servidor.
    * @throws {Error} - Lanza un error si la solicitud de subida falla.
    */
+  // async uploadPhoto(base64Image: string) {
+  //   const formData = new FormData();
+
+  //   // Convertir la imagen base64 a un blob
+  //   const blob = this.#base64toBlob(base64Image, 'image/jpeg');
+
+  //   // Agregar la imagen al formData
+  //   formData.append('photo', blob, 'image.jpg');
+
+  //   // Obtener el token de autenticación
+  //   const token = await this.#authService.obtenerToken();
+
+  //   const options = {
+  //     url: environment.serverUrl + 'photo/upload',
+  //     headers: {
+  //       Authorization: `Bearer ${token}`,
+  //       'Content-Type': 'multipart/form-data',
+  //     },
+  //     data: formData,
+  //   };
+
+  //   try {
+  //     const response = await CapacitorHttp.post(options);
+
+  //     return response;
+  //   } catch (e) {
+  //     throw e;
+  //   }
+  // }
+
   async uploadPhoto(base64Image: string) {
     const formData = new FormData();
 
@@ -37,6 +67,33 @@ export class PhotoService {
       },
       data: formData,
     };
+
+    try {
+      const response = await CapacitorHttp.post(options);
+
+      return response;
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  async uploadPhoto1(image: Photo) {
+    // obtener el token de autenticación
+    const token = await this.#authService.obtenerToken();
+
+    // Crear el objeto de datos
+    const datos = {
+      photo: `data:image/${image.format};base64,${image.base64String}`,
+    };
+
+    const options = {
+      url: environment.serverUrl + 'photo/upload',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+      data: JSON.stringify(datos),
+    }
 
     try {
       const response = await CapacitorHttp.post(options);
@@ -73,5 +130,42 @@ export class PhotoService {
       byteArrays[sliceIndex] = new Uint8Array(bytes);
     }
     return new Blob(byteArrays, { type: contentType });
+  }
+
+  async enviarImagen() {
+    try {
+      // Tomar una foto
+      const image = await Camera.getPhoto({
+        quality: 90,
+        allowEditing: false,
+        resultType: CameraResultType.Base64,
+        source: CameraSource.Camera,
+      });
+
+      // Asegúrate de que tenemos una imagen en base64
+      if (image.base64String) {
+        // Crear el objeto de datos
+        const datos = {
+          photo: `data:image/${image.format};base64,${image.base64String}`
+        };
+
+        // Obtener el token de autenticación
+        const token = await this.#authService.obtenerToken();
+
+        // Realizar la solicitud HTTP
+        const resultado = await CapacitorHttp.post({
+          url: environment.serverUrl + 'photo/upload',
+          data: JSON.stringify(datos),
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        });
+
+        console.log('Respuesta:', resultado.data);
+      }
+    } catch (error) {
+      console.error('Error al enviar la imagen:', error);
+    }
   }
 }

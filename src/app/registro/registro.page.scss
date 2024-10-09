@@ -1,171 +1,64 @@
-.container {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  text-align: center;
-  padding: 16px;
-  max-width: 100%;
-  box-sizing: border-box;
-  /* Permite el scroll interno solo si el contenido es demasiado largo */
+ion-button {
+  --color: black;
 }
 
-.logo {
-  width: 50%;
-  max-width: 240px;
-  height: auto;
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  // margin-top: -3vh;
+}
+
+.secundario {
+  width: 100vh;
+}
+
+ion-img {
+  margin-bottom: 35%;
+  max-width: 350px;
+  max-height: 350px;
+  width: 70%;
+  height: 70%;
   margin: auto;
 }
 
-.usuario,
-.email,
-.numero,
-.password,
-.confirmar {
-  width: 100%;
-  margin-bottom: 5%;
-}
-
-.datos {
- margin-top: 10%;
-  box-sizing: border-box;
-  width: 100%;
-  ion-input{
-    width: 80%;
+ion-input {
+  width: 80%;
   max-width: 20rem;
-  margin: auto ;
-  margin-top: 6%;
-  }
-  .submit{
-    width: 75%;
-    margin: auto ;
-    display: block;
-    padding-top: 7%;
-  }
-}
-
-.Siguiente {
-  background-color: gray; /* Color inicial */
-  width: 90%;
-  height: 4.5vh;
-  border-radius: 10px;
-  justify-content: center;
-  text-align: center;
-  align-items: center;
-  font-size: 18px;
-  cursor: pointer;
-}
-
-.Siguiente:active {
-  background-color: rgb(31, 12, 197);
+  display: block;
+  // margin-top: 4%;
+  margin: 2vh auto;
 }
 
 
-.PrimeraParte {
+.registar {
   display: flex;
   justify-content: center;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  background-color: #f5f5f5;
-}
-
-.PrimeraParte h3 {
-  font-size: clamp(1rem, 2vw + 1rem, 2.5rem);
-}
-
-.reenviar-codigo {
-  cursor: pointer;
-  text-decoration: none;
-}
-
-.reenviar-codigo:hover {
-  text-decoration: underline;
-}
-
-.opciones {
-  display: flex;
-  padding: 1.3%;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-  background-color: #f5f5f5;
-  gap: 10px;
-}
-
-.button {
-  width: 100%;
-  text-transform: capitalize;
-  font-size: 4vw;
-  --background: gray;
-}
-
-.back {
-  padding-top: 6%;
-  padding-left: 5%;
-}
-
-/* Media Queries para pantallas pequeñas */
-@media (max-width: 480px) {
-  .container {
-    padding: 8px;
-    /* Reduce el padding interno en pantallas pequeñas */
-  }
-
-  .logo {
-    width: 70%;
-    max-width: 140px;
-    /* Ajuste del logo para pantallas más pequeñas */
-  }
-
-  .button {
-    font-size: 5vw;
-    padding-top: 3%;
-    padding-bottom: 3%;
-  }
-
-  .usuario,
-  .email,
-  .numero,
-  .password,
-  .confirmar {
-    margin-bottom: 3%;
-    /* Reduce espacio entre los campos */
-  }
-}
-
-/* Media Queries para pantallas muy pequeñas (Moto G4) */
-@media (max-width: 360px) {
-  .container {
-    padding: 5px;
-    /* Reduce el padding interno */
-    overflow-y: auto;
-    /* Activa el scroll interno si el contenido es muy largo */
-  }
-
-  .logo {
+  margin: 0;
+  ion-button {
+    --border-width: 1px;
+    --border-radius: 10px;
+    --border-style: solid;
+    --border-color: #b9b9b956;
+    
+    --box-shadow: 0 4px 8px 0 rgb(0, 0, 0, 0.25);
+    
+    --background: #185ABC;
+    --color: white;
+    --ripple-color: #7e7c7c;
+    
+    --padding-top: 10px;
+    --padding-bottom: 10px;
+    
+    text-transform: none;
+    
     width: 80%;
-    max-width: 120px;
+    max-width: 20rem;
+    margin-top: 1.5rem;
+    height: 3rem;
+    margin-bottom: 1.3rem;
+    font-size: 1.7rem;
+    font-weight: bold;
   }
-
-  .button {
-    font-size: 6vw;
-    padding-top: 2%;
-    padding-bottom: 2%;
-  }
-
-  .usuario,
-  .email,
-  .numero,
-  .password,
-  .confirmar {
-    margin-bottom: 2%;
-  }
-
-  .back {
-    padding-top: 3%;
-    /* Reduce espacio en pantallas muy pequeñas */
-  }
-
 }
-

@@ -4,7 +4,7 @@ import { CapacitorHttp } from '@capacitor/core';
 import { Preferences } from '@capacitor/preferences';
 import { AlertController, ToastController } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { alertCircle, warning } from 'ionicons/icons';
+import { alertCircle } from 'ionicons/icons';
 import { BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment.prod';
 
@@ -13,7 +13,7 @@ import { environment } from 'src/environments/environment.prod';
 })
 export class AuthService {
   constructor() {
-    addIcons({ alertCircle, warning });
+    addIcons({ alertCircle });
   }
   /* ************************************ INYECCIONES ****************************************** */
 
@@ -34,6 +34,8 @@ export class AuthService {
    * @property {ToastController} #toastCtrl - Inyección del servicio ToastController para mostrar toasts.
    */
   #toastCtrl = inject(ToastController);
+
+  #toastQueue: HTMLIonToastElement[] = [];
 
   /* ******************************** FIN DE LAS INYECCIONES ************************************ */
 
@@ -383,10 +385,27 @@ export class AuthService {
       position: 'top',
       positionAnchor: 'header',
       duration: 3000,
-      icon: 'warning',
-      color: 'warning',
+      icon: 'alert-circle',
+      color: 'primary',
+      // cssClass: 'custom-toast',
     });
 
-    await toast.present();
+    this.#toastQueue.push(toast);
+
+    if (this.#toastQueue.length === 1) {
+      this.showNextToast();
+    }
+  }
+
+  private async showNextToast() {
+    if (this.#toastQueue.length > 0) {
+      const toast = this.#toastQueue[0];
+      await toast.present();
+      
+      toast.onDidDismiss().then(() => {
+        this.#toastQueue.shift();
+        this.showNextToast();
+      });
+    }
   }
 }
