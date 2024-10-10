@@ -13,7 +13,7 @@ import {
 import { addIcons } from 'ionicons';
 import { arrowBack } from 'ionicons/icons';
 import { IonicModule } from '@ionic/angular'; // Importa solo IonicModule aquí
-import { AuthService } from '../services/auth/auth.service';
+import { AuthService } from '../../../services/auth/auth.service';
 import { RouterLink } from '@angular/router';
 import { InputOtpModule } from 'primeng/inputotp';
 import { ButtonModule } from 'primeng/button';
@@ -102,7 +102,7 @@ export class RegistroPage implements OnInit {
       .register(this.regisForm.value)
       .then((response) => {
         if (response?.data?.success === 1) {
-          this.authService.navigateByUrl('/confirmar-correo');
+          this.authService.navigateByUrl('auth/confirmar-correo');
           this.isRegister = false;
           this.regisForm.reset();
         } else {

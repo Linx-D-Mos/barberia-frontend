@@ -20,11 +20,17 @@
   </ion-header>
 
   <div class="img">
-    <ion-img
-      routerLink="/photo-profile"
+    @if (loaded) {
+      <ion-img
       class="profile-img"
       [src]="profile.data.user.photo"
     ></ion-img>
+    }@else {
+      <ion-thumbnail slot="start" class="profile-img">
+        <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+      </ion-thumbnail>
+    }
+    
 
     <div class="toggles">
       <div class="foto">

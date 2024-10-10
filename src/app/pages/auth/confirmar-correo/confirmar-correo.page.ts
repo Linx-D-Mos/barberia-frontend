@@ -7,8 +7,8 @@ import { ButtonModule } from 'primeng/button';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment.prod';
 import { CapacitorHttp } from '@capacitor/core';
-import { AuthService } from '../services/auth/auth.service';
-import { VerifyEmailService } from '../services/verify/verify-email.service';
+import { AuthService } from '../../../services/auth/auth.service';
+import { VerifyEmailService } from '../../../services/verify/verify-email.service';
 
 @Component({
   selector: 'app-confirmar-correo',

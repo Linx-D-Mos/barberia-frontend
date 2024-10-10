@@ -4,10 +4,10 @@ import { FormsModule } from '@angular/forms';
 import { NavController, IonContent, IonHeader, IonTitle, IonToolbar, IonIcon, IonItem, IonLabel, IonButton, IonImg, IonSkeletonText, IonModal, IonTabs, IonTabBar, IonTabButton, IonThumbnail } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { arrowBackCircle, arrowBackCircleOutline, arrowBackOutline, logOutOutline, personCircleOutline, saveOutline, cameraOutline, imageOutline, triangle, ellipse, square } from 'ionicons/icons';
-import { AuthService } from '../services/auth/auth.service';
+import { AuthService } from '../../../../services/auth/auth.service';
 import { RouterModule } from '@angular/router';
-import { ClientService } from '../services/client/client.service';
-import { Profile } from '../interfaces/client/interfaces';
+import { ClientService } from '../../../../services/client/client.service';
+import { Profile } from '../../../../interfaces/client/interfaces';
 @Component({
   selector: 'app-perfil',
   templateUrl: './perfil.page.html',
@@ -117,17 +117,17 @@ export class PerfilPage implements OnInit {
         this.loaded =  true;
       }else{
         this.authService.showToast('No se encontraron datos.');
-        this.authService.navigateByUrl('/login');
+        this.authService.navigateByUrl('auth/login');
       }
       // capturando errores
       if (response?.status === 403) {
         this.authService.showToast('No tienes permisos para realizar esta acción.');
-        this.authService.navigateByUrl('/login');
+        this.authService.navigateByUrl('auth/login');
       }
 
       if (response?.status === 500) {
         this.authService.showToast('Error en el servidor, inicie sesión nuevamente.');
-        this.authService.navigateByUrl('/login');
+        this.authService.navigateByUrl('auth/login');
       }
     })
   }

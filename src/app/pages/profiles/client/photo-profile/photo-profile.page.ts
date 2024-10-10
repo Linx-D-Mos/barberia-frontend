@@ -1,21 +1,21 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import {NavController, IonContent, IonHeader, IonTitle, IonToolbar, IonIcon, IonLabel, IonImg } from '@ionic/angular/standalone';
+import {NavController, IonContent, IonHeader, IonTitle, IonToolbar, IonIcon, IonLabel, IonImg, IonSkeletonText, IonThumbnail } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { arrowBackCircleOutline, arrowBackOutline, cameraOutline, imageOutline, cloudUploadOutline, roseSharp } from 'ionicons/icons';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
-import { AuthService } from '../services/auth/auth.service';
+import { AuthService } from '../../../../services/auth/auth.service';
 
-import { PhotoService } from '../services/photo/photo.service';
-import { ClientService } from '../services/client/client.service';
-import { Profile } from '../interfaces/client/interfaces';
+import { PhotoService } from '../../../../services/photo/photo.service';
+import { ClientService } from '../../../../services/client/client.service';
+import { Profile } from '../../../../interfaces/client/interfaces';
 @Component({
   selector: 'app-photo-profile',
   templateUrl: './photo-profile.page.html',
   styleUrls: ['./photo-profile.page.scss'],
   standalone: true,
-  imports: [IonImg,   IonLabel, IonIcon, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [IonThumbnail, IonSkeletonText, IonImg,   IonLabel, IonIcon, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
 })
 export class PhotoProfilePage implements OnInit {
 
@@ -145,17 +145,17 @@ export class PhotoProfilePage implements OnInit {
         this.loaded =  true;
       }else{
         this.authService.showToast('No se encontraron datos.');
-        this.authService.navigateByUrl('/login');
+        this.authService.navigateByUrl('auth/login');
       }
       // capturando errores
       if (response?.status === 403) {
         this.authService.showToast('No tienes permisos para realizar esta acción.');
-        this.authService.navigateByUrl('/login');
+        this.authService.navigateByUrl('auth/login');
       }
 
       if (response?.status === 500) {
         this.authService.showToast('Error en el servidor, inicie sesión nuevamente.');
-        this.authService.navigateByUrl('/login');
+        this.authService.navigateByUrl('auth/login');
       }
     })
   }

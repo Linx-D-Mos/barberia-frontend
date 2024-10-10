@@ -7,8 +7,8 @@ import { personCircleOutline } from 'ionicons/icons';
 import { CapacitorHttp, HttpResponse } from '@capacitor/core';
 import { from, Observable } from 'rxjs';
 import { delay, tap } from 'rxjs/operators';
-import { AuthService } from '../services/auth/auth.service';
-import { DetallesComponent } from '../components/detalles/detalles.component';
+import { AuthService } from '../../../../services/auth/auth.service';
+import { DetallesComponent } from '../../../../components/detalles/detalles.component';
 
 // Importar módulos de Ionic necesarios
 import { IonicModule } from '@ionic/angular';
@@ -88,7 +88,7 @@ export class CitasPage implements OnInit {
   }
 
   profile() {
-    this.nav.navigateForward('/perfil');
+    this.nav.navigateForward('client/perfil');
   }
 
   getPerfil() {

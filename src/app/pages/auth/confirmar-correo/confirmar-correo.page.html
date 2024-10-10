@@ -6,8 +6,7 @@
     </div>
     <div class="SegundaParte">
       <form [formGroup]="verifyForm">
-        <p-inputOtp formControlName="code" [length]="6" style="gap: 4">
-        </p-inputOtp>
+        <p-inputOtp formControlName="code" [length]="6" style="gap: 4" autofocus="true" [integerOnly]=true />
       </form>
     </div>
     <div class="opciones">

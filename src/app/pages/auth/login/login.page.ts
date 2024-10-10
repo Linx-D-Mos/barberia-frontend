@@ -2,7 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { IonHeader, IonToolbar, IonTitle, IonContent, IonItem, IonInput, IonImg, IonButton, IonBackButton, IonTabButton, IonLabel, NavController, IonSpinner, IonInputPasswordToggle, IonToast, IonIcon } from '@ionic/angular/standalone';
 import { ReactiveFormsModule, FormGroup, Validators, FormControl } from '@angular/forms';
-import { AuthService } from '../services/auth/auth.service'; // Asegúrate de que la ruta sea correcta
+import { AuthService } from '../../../services/auth/auth.service'; // Asegúrate de que la ruta sea correcta
 
 @Component({
   selector: 'app-home',
@@ -48,7 +48,7 @@ export class LoginPage implements OnInit {
     this.authService.login(this.loginForm.value)
       .then((response) => {
         if (response?.data?.success === 1) {
-          this.authService.navigateByUrl('/citas');
+          this.authService.navigateByUrl('client/citas');
           this.isLogin = false;
           this.loginForm.reset();
         }else{

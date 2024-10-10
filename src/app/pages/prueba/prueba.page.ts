@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonButton, IonNote, IonText, IonGrid, IonCol, IonRow, IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
 import { InputOtpModule } from 'primeng/inputotp';
 import { ButtonModule } from 'primeng/button';
-import { DetallesComponent } from '../components/detalles/detalles.component';
+import { DetallesComponent } from '../../components/detalles/detalles.component';
 
 @Component({
   selector: 'app-prueba',
