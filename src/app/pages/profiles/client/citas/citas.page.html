@@ -24,6 +24,14 @@
   @if(loaded) {
   <!--lista de cards de citas pendientes-->
   <ion-card class="cartas" *ngFor="let user of users">
+<<<<<<< Updated upstream:src/app/pages/profiles/client/citas/citas.page.html
+=======
+    <ion-card-header>
+      <ion-card-title>{{user.name}}</ion-card-title>
+      <ion-card-subtitle>Fecha: {{date}}</ion-card-subtitle>
+      <ion-card-subtitle>Hora: {{time}}</ion-card-subtitle>
+    </ion-card-header>
+>>>>>>> Stashed changes:src/app/citas/citas.page.html
     <ion-card-content class="card-content">
       <div class="info">
         <div>
@@ -44,6 +52,9 @@
         <h1>
           <ion-skeleton-text [animated]="true" style="width: 50%; height: 1.3rem;"></ion-skeleton-text>
         </h1>
+        <p>
+          <ion-skeleton-text [animated]="true" style="width: 30%; height: 1.1rem"></ion-skeleton-text>
+        </p>
         <p>
           <ion-skeleton-text [animated]="true" style="width: 30%; height: 1.1rem"></ion-skeleton-text>
         </p>
