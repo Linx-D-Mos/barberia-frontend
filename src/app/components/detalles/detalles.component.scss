@@ -40,6 +40,7 @@
     font-size: 1.1rem; /* Tamaño escalable */
     font-weight: bold;
     text-align: left;
+    margin-bottom: 2vh;
 }
 
 .servicios {
@@ -48,6 +49,8 @@
     width: 100%;
     font-size: 1rem;
     font-weight: bold;
+    margin-top: 2vh;
+    gap: 1.5vh; /* Espacio entre los servicios */
 }
 
 .cerrar {
@@ -89,7 +92,7 @@ ion-icon {
 }
 
 #rechazo:active {
-    background-color: #521f24;
+    background-color: #e93849;
 }
 
 .botones {

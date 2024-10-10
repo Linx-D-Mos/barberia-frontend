@@ -28,7 +28,6 @@ export class CitasPage implements OnInit {
 
   users: any[] = [];
   date: string = '';
-  time: string = '';
   perfil: any;
   public loaded: boolean = false;
   public ionContentList = [1, 2, 3, 4, 5, 6, 7, 8];
@@ -45,7 +44,6 @@ export class CitasPage implements OnInit {
 
   ngOnInit() {
     this.date = new Date().toLocaleDateString();
-    this.time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
     this.cargarDatos().subscribe();
     this.getPerfil();
   }
