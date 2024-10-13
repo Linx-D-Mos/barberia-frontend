@@ -12,6 +12,8 @@ import { DetallesComponent } from '../../../../components/detalles/detalles.comp
 
 // Importar módulos de Ionic necesarios
 import { IonicModule } from '@ionic/angular';
+import { ClientService } from 'src/app/services/client/client.service';
+import { Profile } from 'src/app/interfaces/client/interfaces';
 
 @Component({
   selector: 'app-citas',
@@ -26,13 +28,14 @@ import { IonicModule } from '@ionic/angular';
 })
 export class CitasPage implements OnInit {
 
+  profile!: Profile;
   users: any[] = [];
   date: string = '';
-  perfil: any;
   public loaded: boolean = false;
-  public ionContentList = [1, 2, 3, 4, 5, 6, 7, 8];
+  public ionContentList = [1, 2, 3, 4, 5, 6, 7, 8];// Lista de contenido para el skeleton
   private nav = inject(NavController);
   private authService = inject(AuthService);
+  #clientService = inject(ClientService);
 
   constructor(
     private actionSheetController: ActionSheetController,
@@ -45,7 +48,7 @@ export class CitasPage implements OnInit {
   ngOnInit() {
     this.date = new Date().toLocaleDateString();
     this.cargarDatos().subscribe();
-    this.getPerfil();
+    this.getProfile();
   }
 
   async openShare() {
@@ -57,13 +60,13 @@ export class CitasPage implements OnInit {
     });
     modal.onDidDismiss().then(() => {
       this.closeShare(modal); // Llama a la función de cerrar modal
-  });
+    });
     return await modal.present();
   }
 
   async closeShare(modal: HTMLIonModalElement) {
     await modal.dismiss(); // Cierra el modal
-}
+  }
 
 
   cargarDatos(): Observable<HttpResponse> {
@@ -87,23 +90,35 @@ export class CitasPage implements OnInit {
     return { date, time };
   }
 
-  profile() {
+  irPerfil() {
     this.nav.navigateForward('client/perfil');
   }
 
-  getPerfil() {
-    this.authService.perfil()
+  getProfile() {
+    this.#clientService.profile()
       .then((response) => {
-        if (response?.data?.success === 1) {
-          this.perfil = response.data;
+        // Asignando los datos del perfil
+        this.profile = response.data;
+        if (this.profile.success === 1) {
+          this.loaded = true;
         } else {
-          this.authService.showAlert(
-            'Su token de acceso ya no es valido, por favor inicie sesión nuevamente.'
-          );
+          this.authService.showToast('No se encontraron datos.');
+          this.authService.navigateByUrl('auth/login');
+        }
+        if (this.profile.data.barbershop_id == null) {
+          this.nav.navigateForward('client/selecionar-barberia');
+        }
+
+        // capturando errores
+        if (response?.status === 403) {
+          this.authService.showToast('No tienes permisos para realizar esta acción.');
+          this.authService.navigateByUrl('auth/login');
+        }
+
+        if (response?.status === 500) {
+          this.authService.showToast('Error en el servidor, inicie sesión nuevamente.');
+          this.authService.navigateByUrl('auth/login');
         }
       })
-      .catch(e => {
-        this.authService.showAlert(e?.error?.message);
-      });
   }
 }

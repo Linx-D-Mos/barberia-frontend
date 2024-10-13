@@ -5,7 +5,7 @@
       <ion-label class="name">
         Bienvenido <br>
         @if(loaded){
-        {{perfil?.datum?.name}}
+        {{profile.data.user.name}}
         }
         @if(!loaded){
         <p>
@@ -13,7 +13,7 @@
         </p>
         }
       </ion-label>
-      <ion-icon (click)="profile()" class="account" name="person-circle-outline" size="large"></ion-icon>
+      <ion-icon (click)="irPerfil()" class="account" name="person-circle-outline" size="large"></ion-icon>
 
     </div>
   </ion-toolbar>
@@ -27,7 +27,6 @@
     <ion-card-header>
       <ion-card-title>{{user.name}}</ion-card-title>
       <ion-card-subtitle>Fecha: {{date}}</ion-card-subtitle>
-      <!-- <ion-card-subtitle>Hora: {{time}}</ion-card-subtitle> -->
     </ion-card-header>
     <ion-card-content class="card-content">
       <div class="info">
@@ -39,7 +38,7 @@
       </div>
     </ion-card-content>
   </ion-card>
-  
+
   }
   @if(!loaded) {
   @for(item of ionContentList; track $index){

@@ -39,3 +39,23 @@
 @import url('https://fonts.googleapis.com/css2?family=PT+Sans&display=swap');
 @import "primeng/resources/themes/lara-light-blue/theme.css";
 @import "primeng/resources/primeng.css";
+
+//estilo de la alerta de auth service
+.app-alert .alert-wrapper {
+  .alert-head {
+    background: var(--ion-color-primary);
+
+    h2 {
+      color: white;
+    }
+  }
+
+  .alert-button-group {
+    button {
+      background: var(--ion-color-primary);
+      span {
+        color: white;
+      }
+    }
+  }
+}
