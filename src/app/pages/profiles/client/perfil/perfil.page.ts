@@ -13,7 +13,7 @@ import { Profile } from '../../../../interfaces/client/interfaces';
   templateUrl: './perfil.page.html',
   styleUrls: ['./perfil.page.scss'],
   standalone: true,
-  imports: [IonTabButton, IonTabBar, IonTabs, 
+  imports: [IonTabButton, IonTabBar, IonTabs,
     IonModal,
     IonSkeletonText,
     IonImg,
@@ -36,17 +36,17 @@ export class PerfilPage implements OnInit {
   /* ************************************ INYECCIONES ****************************************** */
 
   #clientService = inject(ClientService);
-  
+
   /* ******************************** FIN DE LAS INYECCIONES ************************************ */
-  
+
   profile!: Profile;
-  
+
   perfil: any;
   public loaded: boolean = false;
- 
+
 
   constructor() {
-    addIcons({arrowBackOutline,saveOutline,triangle,ellipse,square,personCircleOutline,cameraOutline,imageOutline,logOutOutline,});
+    addIcons({ arrowBackOutline, saveOutline, triangle, ellipse, square, personCircleOutline, cameraOutline, imageOutline, logOutOutline, });
   }
 
   private authService = inject(AuthService);
@@ -57,7 +57,8 @@ export class PerfilPage implements OnInit {
       .logout()
       .then((response) => {
         if (response?.data?.success === 1) {
-          this.authService.navigateByUrl('/login'); // Redirigir a la página de inicio de sesión
+          this.authService.navigateByUrl('/auth/login'); // Redirigir a la página de inicio de sesión
+          this.authService.showToast('Sesión cerrada correctamente.');
         } else {
           this.authService.showAlert(
             'Su token de acceso ya no es valido, por favor inicie sesión nuevamente.'
@@ -80,19 +81,19 @@ export class PerfilPage implements OnInit {
 
   getPerfil() {
     this.authService.perfil()
-    .then((response) => {
-      if (response?.data?.success === 1){
-        this.perfil = response.data;
-        this.loaded =  true;
-      }else{
-        this.authService.showAlert(
-          'Su token de acceso ya no es valido, por favor inicie sesión nuevamente.'
-        );
-      }
-    })
-    .catch(e => {
-      this.authService.showAlert(e?.error?.message);
-    });
+      .then((response) => {
+        if (response?.data?.success === 1) {
+          this.perfil = response.data;
+          this.loaded = true;
+        } else {
+          this.authService.showAlert(
+            'Su token de acceso ya no es valido, por favor inicie sesión nuevamente.'
+          );
+        }
+      })
+      .catch(e => {
+        this.authService.showAlert(e?.error?.message);
+      });
   }
 
   /**
@@ -110,44 +111,44 @@ export class PerfilPage implements OnInit {
    */
   getProfile() {
     this.#clientService.profile()
-    .then((response) => {
-      // Asignando los datos del perfil
-      this.profile = response.data;
-      if (this.profile.success === 1){
-        this.loaded =  true;
-      }else{
-        this.authService.showToast('No se encontraron datos.');
-        this.authService.navigateByUrl('auth/login');
-      }
-      // capturando errores
-      if (response?.status === 403) {
-        this.authService.showToast('No tienes permisos para realizar esta acción.');
-        this.authService.navigateByUrl('auth/login');
-      }
+      .then((response) => {
+        // Asignando los datos del perfil
+        this.profile = response.data;
+        if (this.profile.success === 1) {
+          this.loaded = true;
+        } else {
+          this.authService.showToast('No se encontraron datos.');
+          this.authService.navigateByUrl('auth/login');
+        }
+        // capturando errores
+        if (response?.status === 403) {
+          this.authService.showToast('No tienes permisos para realizar esta acción.');
+          this.authService.navigateByUrl('auth/login');
+        }
 
-      if (response?.status === 500) {
-        this.authService.showToast('Error en el servidor, inicie sesión nuevamente.');
-        this.authService.navigateByUrl('auth/login');
-      }
-    })
+        if (response?.status === 500) {
+          this.authService.showToast('Error en el servidor, inicie sesión nuevamente.');
+          this.authService.navigateByUrl('auth/login');
+        }
+      })
   }
 
   getNumber() {
     this.authService.perfil()
-    .then((response) => {
-      if (response?.data?.success === 1){
-        this.perfil = response.data;
-        this.loaded =  true;
-      }else{
-        this.authService.showAlert(
-          'Su token de acceso ya no es valido, por favor inicie sesión nuevamente.'
-        );
-      }
-    })
-    .catch(e => {
-      this.authService.showAlert(e?.error?.message);
-    });
+      .then((response) => {
+        if (response?.data?.success === 1) {
+          this.perfil = response.data;
+          this.loaded = true;
+        } else {
+          this.authService.showAlert(
+            'Su token de acceso ya no es valido, por favor inicie sesión nuevamente.'
+          );
+        }
+      })
+      .catch(e => {
+        this.authService.showAlert(e?.error?.message);
+      });
   }
 
-  
+
 }

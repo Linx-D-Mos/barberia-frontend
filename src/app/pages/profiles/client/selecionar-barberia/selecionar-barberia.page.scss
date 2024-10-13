@@ -1,0 +1,33 @@
+.cartas {
+  background-color: #CDCDCD;
+  border-radius: 15px;
+  margin: 6% 6% 6% 6%;
+}
+
+.card-content {
+  display: flex;
+  justify-content: space-between;
+  /* Distribuir espacio entre los elementos */
+  align-items: center;
+  /* Alinear los elementos verticalmente */
+}
+
+.info {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  /* Asegurar que el contenedor ocupe todo el ancho de la tarjeta */
+  align-items: center;
+  /* Alinear los elementos verticalmente */
+}
+
+.aceptar {
+  margin-left: auto;
+  /* Empujar el botón hacia la derecha */
+  font-size: 18px;
+  font-weight: bold;
+  font-family: "PT Sans", sans-serif;
+  font-style: normal;
+  text-transform: capitalize;
+  --background: #2C2C2C;
+}
