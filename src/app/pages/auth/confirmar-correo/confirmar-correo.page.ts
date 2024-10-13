@@ -9,6 +9,7 @@ import { environment } from 'src/environments/environment.prod';
 import { CapacitorHttp } from '@capacitor/core';
 import { AuthService } from '../../../services/auth/auth.service';
 import { VerifyEmailService } from '../../../services/verify/verify-email.service';
+import { DataService } from 'src/app/services/data/data.service';
 
 @Component({
   selector: 'app-confirmar-correo',
@@ -21,6 +22,8 @@ export class ConfirmarCorreoPage implements OnInit {
 
   #authService = inject(VerifyEmailService);
   private authService = inject(AuthService);
+
+  private dataServise = inject(DataService);
   verifyForm!: FormGroup;
   email: any;
   // otpValue: string = '';  // Variable para almacenar el valor del OTP
@@ -30,26 +33,10 @@ export class ConfirmarCorreoPage implements OnInit {
   isVerify: boolean = false;
 
   ngOnInit() {
-    this.getEmail();
+    this.email = this.dataServise.getData();
     this.verifyForm = new FormGroup({
       code: new FormControl('', [Validators.required]),
     });
-  }
-
-  getEmail() {
-    this.authService.perfil()
-      .then((response) => {
-        if (response?.data?.success === 1) {
-          this.email = response.data;
-        } else {
-          this.authService.showAlert(
-            'Su token de acceso ya no es valido, por favor inicie sesión nuevamente.'
-          );
-        }
-      })
-      .catch(e => {
-        this.authService.showAlert(e?.error?.message);
-      });
   }
 
   verificar(){
@@ -58,7 +45,7 @@ export class ConfirmarCorreoPage implements OnInit {
     this.#authService.verifyEmail(this.verifyForm.value)
       .then((response) => {
         if (response?.data?.success === 1) {
-          this.authService.navigateByUrl('/citas');
+          this.authService.navigateByUrl('client/citas');
           console.log("si");
           this.isVerify = false;
           this.verifyForm.reset();
