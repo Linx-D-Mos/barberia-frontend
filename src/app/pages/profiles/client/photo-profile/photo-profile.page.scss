@@ -20,13 +20,15 @@
 
 .img {
   padding-top: 40%;
-  border-radius: 100%;
+
 }
 
 .profile-img {
   width: 250px;
   height: 250px;
   margin: auto;
+  border-radius: 50%;
+  overflow: hidden; 
 }
 
 .toggles {

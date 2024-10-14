@@ -1,0 +1,8 @@
+<div *ngIf="imageUrl; else defaultAvatar">
+ <ion-img [src]="imageUrl" alt="Foto de perfil" class="avatar-image"></ion-img>
+</div>
+<ng-template #defaultAvatar>
+  <div class="default-avatar" [style.background-color]="backgroundColor">
+    {{ initials }}
+  </div>
+</ng-template>

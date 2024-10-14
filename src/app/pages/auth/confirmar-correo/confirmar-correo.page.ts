@@ -74,7 +74,7 @@ export class ConfirmarCorreoPage implements OnInit {
         .then((response) => {
           if (response?.data?.success === 1) {
             console.log("Verificación exitosa");
-            this.authService.navigateByUrl('/auth/login');
+            this.authService.navigateByUrl('client/auth/login');
             this.isVerify = false;
             this.verifyForm.reset();
           } else {

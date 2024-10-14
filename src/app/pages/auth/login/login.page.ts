@@ -17,7 +17,7 @@ export class LoginPage implements OnInit {
     
   }
   loginForm!: FormGroup; // Formulario de login
-
+ 
   isLogin = false; 
 
   /**
@@ -32,6 +32,7 @@ export class LoginPage implements OnInit {
    * @type {AuthService}
    */
   private authService = inject(AuthService);
+  private nav = inject(NavController);
 
   ngOnInit() {
     /* Inincializamos el formulario */
@@ -69,6 +70,7 @@ export class LoginPage implements OnInit {
   onInput(ev: any) {
     this.pass = ev.target!.value;
   }
+
 
 
 }

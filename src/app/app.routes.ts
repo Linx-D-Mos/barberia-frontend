@@ -62,6 +62,13 @@ export const routes: Routes = [
         path: 'selecionar-barberia',
         loadComponent: () => import('./pages/profiles/client/selecionar-barberia/selecionar-barberia.page').then(m => m.SelecionarBarberiaPage)
       },
+      {
+        path: 'barberos',
+        loadComponent: () => import('./pages/profiles/client/barberos/barberos.page').then( m => m.BarberosPage)
+      },
+      
+  
+
     ]
   },
   {
@@ -79,10 +86,8 @@ export const routes: Routes = [
   },
   {
     path: 'prueba',
-    loadComponent: () => import('./pages/prueba/prueba.page').then(m => m.PruebaPage)
-  }
-
-
+    loadComponent: () => import('./pages/prueba/prueba.page').then( m => m.PruebaPage)
+  },
 
 
 

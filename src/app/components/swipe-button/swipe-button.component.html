@@ -1,0 +1,10 @@
+<div class="swipe-container">
+  <div #swipeTrack class="swipe-track">
+    <div class="swipe-text" [class.complete]="swipeComplete">
+      {{ swipeComplete ? 'Servicio Terminado' : 'Terminar Servicio'}}
+    </div>
+    <div #swipeButton class="swipe-button">
+      <ion-icon name="arrow-forward-outline"></ion-icon>
+    </div>
+  </div>
+</div>
