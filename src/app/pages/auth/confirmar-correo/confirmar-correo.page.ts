@@ -9,80 +9,109 @@ import { environment } from 'src/environments/environment.prod';
 import { CapacitorHttp } from '@capacitor/core';
 import { AuthService } from '../../../services/auth/auth.service';
 import { VerifyEmailService } from '../../../services/verify/verify-email.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-confirmar-correo',
   templateUrl: './confirmar-correo.page.html',
   styleUrls: ['./confirmar-correo.page.scss'],
   standalone: true,
-  imports: [ ReactiveFormsModule ,ButtonModule, InputOtpModule, IonButton, IonText, IonNote, IonGrid, IonRow, IonCol, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [ReactiveFormsModule, ButtonModule, InputOtpModule, IonButton, IonText, IonNote, IonGrid, IonRow, IonCol, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
 })
 export class ConfirmarCorreoPage implements OnInit {
 
   #authService = inject(VerifyEmailService);
   private authService = inject(AuthService);
+  emailShared: string | null = null;
+  isVerify: boolean = false;
+  pass: any;
   verifyForm!: FormGroup;
   email: any;
-  // otpValue: string = '';  // Variable para almacenar el valor del OTP
-  // nada = {
-  //   code: this.otpValue
-  // }
-  isVerify: boolean = false;
+  contexto: string = '';
+  isExist: boolean = false;
+
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.getEmail();
+    this.emailShared = this.authService.getEmail(); // Obtiene el valor del correo
     this.verifyForm = new FormGroup({
+      email: new FormControl(this.emailShared, [Validators.required, Validators.email]),
       code: new FormControl('', [Validators.required]),
     });
+    this.route.params.subscribe(params => {
+      this.contexto = params['contexto']; // Obtiene el parámetro contexto
+      console.log('Valor de contexto:', this.contexto);
+
+      // Aquí puedes llamar a getEmail() si es necesario
+      this.getEmail();
+    });
+    console.log('Email desde otra página:', this.emailShared); // Muestra el valor del correo en la consola
   }
 
   getEmail() {
-    this.authService.perfil()
-      .then((response) => {
-        if (response?.data?.success === 1) {
-          this.email = response.data;
-        } else {
-          this.authService.showAlert(
-            'Su token de acceso ya no es valido, por favor inicie sesión nuevamente.'
-          );
-        }
-      })
-      .catch(e => {
-        this.authService.showAlert(e?.error?.message);
-      });
+    if (this.contexto === 'registrar') {
+      this.authService.perfil()
+        .then((response) => {
+          if (response?.data?.success === 1) {
+            this.email = response.data; // Asigna el email recibido
+          } else {
+            this.authService.showAlert('Su token de acceso ya no es válido, por favor inicie sesión nuevamente.');
+          }
+        })
+        .catch(e => {
+          this.authService.showAlert(e?.error?.message);
+        });
+    } else if (this.contexto === 'recuperar') {
+      this.email = this.authService.getEmail(); // Obtiene el email almacenado en el servicio
+    }
   }
 
-  verificar(){
-    this.isVerify = true;
-
-    this.#authService.verifyEmail(this.verifyForm.value)
-      .then((response) => {
-        if (response?.data?.success === 1) {
-          this.authService.navigateByUrl('/citas');
-          console.log("si");
+  verificarCodigo() {
+    if (this.contexto == 'registrar') {
+      this.isVerify = true;
+      this.#authService.verifyEmail(this.verifyForm.value)
+        .then((response) => {
+          if (response?.data?.success === 1) {
+            console.log("Verificación exitosa");
+            this.authService.navigateByUrl('/auth/login');
+            this.isVerify = false;
+            this.verifyForm.reset();
+          } else {
+            this.isVerify = false;
+            this.authService.showToast(response?.data?.message);
+          }
+        })
+        .catch((e) => {
           this.isVerify = false;
-          this.verifyForm.reset();
-        }else{
-          this.isVerify = false;
-          this.authService.showToast(response?.data?.message);
-        }
-      })
-      .catch((e) => {
-        this.isVerify = false;
-        this.authService.showToast(e?.error?.message);
-      });
+          this.authService.showToast(e?.error?.message);
+        });
+    }
+    if (this.contexto == 'recuperar') {
+      this.isExist = true;
+      const formValue = this.verifyForm.value;
+      formValue.reset_password_code = formValue.code;
+      this.authService.verifyCodeChangePasswd(formValue)
+        .then((response) => {
+          if (response?.data?.success === 1) {
+            console.log('Código verificado');
+            this.authService.navigateByUrl('/auth/cambiar-clave');
+            this.isExist = false;
+            this.verifyForm.reset();
+          } else {
+            this.isExist = false;
+            this.authService.showAlert(response?.data?.message);
+          }
+        })
+        .catch(e => {
+          console.log(e);
+          this.isExist = false;
+          this.authService.showAlert(e?.error?.message);
+        });
+    }
   }
 
   resendCode() {
     console.log('Reenviar código');
     // Aquí puedes agregar la lógica para reenviar el código
   }
-
-  // // Función que puedes utilizar para manejar el valor del OTP
-  // impresion() {
-  //   console.log(this.otpValue);
-  //   console.log(this.nada);
-  //   // Aquí puedes agregar la lógica adicional que necesites
-  // }
-
 }

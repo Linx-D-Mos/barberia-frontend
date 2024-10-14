@@ -1,87 +1,31 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-  AbstractControl,
-  FormControl,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-  ValidationErrors,
-  ValidatorFn,
-  Validators,
-} from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, FormsModule, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { IonIcon, NavController, IonSpinner, IonInputPasswordToggle, IonImg, IonInput, IonButton, IonLabel, IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
+import { AuthService } from 'src/app/services/auth/auth.service';
+import { arrowBackOutline } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
-import { arrowBack } from 'ionicons/icons';
-import { IonicModule } from '@ionic/angular'; // Importa solo IonicModule aquí
-import { AuthService } from '../../../services/auth/auth.service';
-import { RouterLink } from '@angular/router';
-import { InputOtpModule } from 'primeng/inputotp';
-import { ButtonModule } from 'primeng/button';
 
 @Component({
-  selector: 'app-registro',
-  templateUrl: './registro.page.html',
-  styleUrls: ['./registro.page.scss'],
+  selector: 'app-cambiar-clave',
+  templateUrl: './cambiar-clave.page.html',
+  styleUrls: ['./cambiar-clave.page.scss'],
   standalone: true,
-  imports: [
-    ButtonModule,
-    InputOtpModule,
-    IonicModule, // Solo necesitas IonicModule para los componentes de Ionic
-    RouterLink,
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-  ],
+  imports: [IonIcon, IonSpinner, IonInputPasswordToggle, ReactiveFormsModule, IonImg, IonInput, IonButton, IonLabel, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
 })
-export class RegistroPage implements OnInit {
-  /* *************************************** INYECCIONES *************************************** */
-
-  /**
-   * Servicio de autenticación inyectado.
-   *
-   * @private
-   * @type {AuthService}
-   */
+export class CambiarClavePage implements OnInit {
+  isVerify: boolean = false;
+  cambiarForm!: FormGroup;
   private authService = inject(AuthService);
-
-  /* ********************************** FIN DE LAS INYECCIONES ********************************** */
-
-  /* **************************************** VARIABLES **************************************** */
-
-  /**
-   * Variable para almacenar el formulario de registro
-   */
-  regisForm!: FormGroup;
-
-  /**
-   * Variable para almacenar la contraseña
-   */
   pass: any;
-
-  /**
-   * Variable para almacenar la confirmación de la contraseña
-   */
   pass_confirm: any;
 
-  /**
-   * Variable para saber si se está registrando
-   */
-  isRegister = false;
-
-  /* ************************************* FIN DE VARIABLES ************************************* */
-
-  constructor() {
-    addIcons({ arrowBack });
+  constructor(private nav: NavController) {
+    addIcons({ arrowBackOutline });
   }
 
   ngOnInit() {
-    this.regisForm = new FormGroup({
-      name: new FormControl('', [Validators.required]),
-      email: new FormControl('', [Validators.email, Validators.required]),
-      phone: new FormControl('', [
-        Validators.required,
-        Validators.pattern(/^[0-9]{10}$/),
-      ]),
+    this.cambiarForm = new FormGroup({
       password: new FormControl('', [
         Validators.required,
         Validators.minLength(12),
@@ -92,33 +36,31 @@ export class RegistroPage implements OnInit {
         passwordMatchValidator('password'),
       ]),
     });
-    // this.getEmail();
   }
 
-  registrar() {
-    this.isRegister = true;
-
-    this.authService
-      .register(this.regisForm.value)
+  cambiarClave() {
+    this.isVerify = true;
+    this.authService.changePasswd(this.cambiarForm.value)
       .then((response) => {
         if (response?.data?.success === 1) {
-          this.authService.navigateByUrl('auth/confirmar-correo/registrar');
-          this.isRegister = false;
-          this.regisForm.reset();
+          this.authService.showToast('Contraseña cambiada correctamente');
+          this.authService.navigateByUrl('/auth/login');
+          this.isVerify = false;
+          this.cambiarForm.reset();
         } else {
-          this.isRegister = false;
+          this.isVerify = false;
           this.authService.showToast(response?.data?.message);
         }
       })
       .catch((e) => {
-        this.isRegister = false;
+        this.isVerify = false;
         this.authService.showToast(e?.error?.message);
       });
   }
 
   /**
    * Función para obtener el valor del input de la contraseña
-   * @param ev
+   * @param ev 
    */
   onInput(ev: any) {
     this.pass = ev.target!.value;
@@ -130,6 +72,10 @@ export class RegistroPage implements OnInit {
    */
   onInputConfirm(ev: any) {
     this.pass_confirm = ev.target!.value;
+  }
+
+  goBack() {
+    this.nav.back();
   }
 }
 
@@ -181,3 +127,4 @@ export function createPasswordStrengthValidator(): ValidatorFn {
     return !passwordValid ? { passwordStrength: true } : null;
   };
 }
+

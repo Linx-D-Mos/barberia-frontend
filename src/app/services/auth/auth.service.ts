@@ -15,6 +15,23 @@ export class AuthService {
   constructor() {
     addIcons({ alertCircle });
   }
+
+  /* ******************** Compartir datos entre 2 pages ********************* */
+
+  private emailShared: string | null = null;
+
+  setEmail(email: string) {
+    this.emailShared = email;
+  }
+
+  // Método para obtener el valor del correo
+  getEmail(): string | null {
+    return this.emailShared;
+  }
+
+  /*
+
+
   /* ************************************ INYECCIONES ****************************************** */
 
   /**
@@ -401,11 +418,84 @@ export class AuthService {
     if (this.#toastQueue.length > 0) {
       const toast = this.#toastQueue[0];
       await toast.present();
-      
+
       toast.onDidDismiss().then(() => {
         this.#toastQueue.shift();
         this.showNextToast();
       });
+    }
+  }
+
+
+  /**
+    * Verifica si un email existe en la base de datos
+    * @param formValue - El email a verificar
+    * @returns Una promesa que resuelve con la respuesta del servidor
+    */
+  async verificarEmail(formValue: any) {
+    const options = {
+      url: environment.serverUrl + 'auth/send_reset_password_code',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      data: JSON.stringify(formValue),
+    };
+
+    try {
+      const response = await CapacitorHttp.post(options);
+      return response;
+    } catch (e) {
+      throw e;
+    }
+  }
+
+
+  /**
+   * Verificar el codigo de reestablecimiento de contraseña de un cliente
+   * @param formValue - El código a verificar
+   * @returns Una promesa que resuelve con la respuesta del servidor
+   */
+
+  async verifyCodeChangePasswd(formValue: any) {
+    const options = {
+      url: environment.serverUrl + 'auth/verify_reset_password_code',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      data: JSON.stringify(formValue),
+    };
+
+    try {
+      const response = await CapacitorHttp.post(options);
+      this.establecerToken(response?.data?.token);
+      return response;
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  /**
+     * Cambio de clave
+     * @param formValue - la contraseña que va a ser la nueva
+     * @returns Una promesa que resuelve con la respuesta del servidor
+     */
+
+  async changePasswd(formValue: any) {
+    const token = await this.obtenerToken();
+    const options = {
+      url: environment.serverUrl + 'auth/reset_password',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+      data: JSON.stringify(formValue),
+    };
+
+    try {
+      const response = await CapacitorHttp.put(options);
+      return response;
+    } catch (e) {
+      throw e;
     }
   }
 }

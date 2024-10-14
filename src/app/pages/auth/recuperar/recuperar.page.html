@@ -2,11 +2,13 @@
   <ion-icon (click)="goBack()" class="back" size="large" name="arrow-back-outline"></ion-icon>
   <div class="container">
     <ion-img class="logo" src="assets/logo.webp"></ion-img>
-    <div class="correo">
-      <ion-input label="Ingresa tu correo" label-placement="floating" fill="outline" placeholder="ejemplo@gmail.com">
-      </ion-input>
-    </div>
-    <ion-button id="recovery">
+    <form [formGroup]="emailForm">
+        <ion-input label="Ingresa tu correo" 
+        formControlName="email"
+        label-placement="floating" fill="outline" placeholder="ejemplo@gmail.com">
+        </ion-input>
+    </form>
+    <ion-button id="recovery" (click)="verificar()">
       Recuperar
     </ion-button>
     <div class="reenviar">

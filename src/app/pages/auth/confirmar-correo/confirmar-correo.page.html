@@ -1,12 +1,17 @@
 <ion-content>
   <div class="container">
-    <div class="PrimeraParte">
+    <div class="PrimeraParte" *ngIf="contexto === 'registrar'">
       <h3>Ingresa el código de verificación enviado a tu correo</h3>
-      <p>{{email?.datum?.email}}</p>
+      <p>{{ email?.datum?.email }}</p>
+    </div>
+    <div class="PrimeraParte" *ngIf="contexto === 'recuperar'">
+      <h3>Ingresa el código de verificación enviado a tu correo</h3>
+      <p>{{ email }}</p> <!-- Asegúrate de que `email` tenga el valor correcto -->
     </div>
     <div class="SegundaParte">
       <form [formGroup]="verifyForm">
-        <p-inputOtp formControlName="code" [length]="6" style="gap: 4" autofocus="true" [integerOnly]=true />
+        <input type="text" formControlName="email" style="display: none;">
+        <p-inputOtp formControlName="code" [length]="6" style="gap: 4;" autofocus="true" [integerOnly]=true />
       </form>
     </div>
     <div class="opciones">
@@ -16,7 +21,7 @@
           Reenviar código 
         </ion-text>
       </ion-note>
-      <ion-button (click)="verificar()" class="Confirmar" color="medium" style="width: 70%;;">Siguiente</ion-button>
+      <ion-button (click)="verificarCodigo()" class="Confirmar" color="medium" style="width: 70%;;">Siguiente</ion-button>
     </div>
   </div>
 </ion-content>

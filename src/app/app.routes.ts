@@ -8,7 +8,7 @@ export const routes: Routes = [
   },
   {
     path: 'auth',
-    loadComponent: () => import('./pages/auth/auth.page').then( m => m.AuthPage),
+    loadComponent: () => import('./pages/auth/auth.page').then(m => m.AuthPage),
     children: [
       {
         path: 'login',
@@ -23,27 +23,31 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/auth/recuperar/recuperar.page').then(m => m.RecuperarPage),
       },
       {
-        path: 'confirmar-correo',
-        loadComponent: () => import('./pages/auth/confirmar-correo/confirmar-correo.page').then( m => m.ConfirmarCorreoPage)
+        path: 'confirmar-correo/:contexto',
+        loadComponent: () => import('./pages/auth/confirmar-correo/confirmar-correo.page').then(m => m.ConfirmarCorreoPage)
+      },
+      {
+        path: 'cambiar-clave',
+        loadComponent: () => import('./pages/auth/cambiar-clave/cambiar-clave.page').then(m => m.CambiarClavePage)
       },
 
     ]
   },
   {
     path: 'client',
-    loadComponent: () => import('./pages/profiles/client/client.page').then( m => m.ClientPage),
+    loadComponent: () => import('./pages/profiles/client/client.page').then(m => m.ClientPage),
     children: [
       {
         path: 'barberias',
-        loadComponent: () => import('./pages/profiles/client/barberias/barberias.page').then( m => m.BarberiasPage)
+        loadComponent: () => import('./pages/profiles/client/barberias/barberias.page').then(m => m.BarberiasPage)
       },
       {
         path: 'perfil',
-        loadComponent: () => import('./pages/profiles/client/perfil/perfil.page').then( m => m.PerfilPage)
+        loadComponent: () => import('./pages/profiles/client/perfil/perfil.page').then(m => m.PerfilPage)
       },
       {
         path: 'photo-profile',
-        loadComponent: () => import('./pages/profiles/client/photo-profile/photo-profile.page').then( m => m.PhotoProfilePage)
+        loadComponent: () => import('./pages/profiles/client/photo-profile/photo-profile.page').then(m => m.PhotoProfilePage)
       },
       {
         path: 'citas',
@@ -54,9 +58,9 @@ export const routes: Routes = [
   },
   {
     path: 'barber',
-    loadComponent: () => import('./pages/profiles/barber/barber.page').then( m => m.BarberPage),
+    loadComponent: () => import('./pages/profiles/barber/barber.page').then(m => m.BarberPage),
     children: [
-      
+
     ]
   },
   {
@@ -65,8 +69,9 @@ export const routes: Routes = [
   },
   {
     path: 'prueba',
-    loadComponent: () => import('./pages/prueba/prueba.page').then( m => m.PruebaPage)
-  },
+    loadComponent: () => import('./pages/prueba/prueba.page').then(m => m.PruebaPage)
+  }
+
 
 
 

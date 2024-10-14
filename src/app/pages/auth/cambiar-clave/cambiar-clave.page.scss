@@ -1,0 +1,58 @@
+ion-content {
+    padding: 0 20px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100%;
+    transform: translateY(-20px);
+    width: 100%;
+}
+
+.logo {
+    transform: translateY(-10px);
+    width: 300px;
+    height: 300px;
+}
+
+form {
+    width: 80%;
+    text-align: left;
+}
+
+.input {
+    margin-top: 1.5rem; // Aplicar el margen a todos los inputs
+}
+
+ion-button {
+    --border-width: 1px;
+    --border-radius: 10px;
+    --border-style: solid;
+    --border-color: #b9b9b956;
+    --box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.25);
+    --ripple-color: #7e7c7c;
+
+    text-transform: none;
+    width: 100%; // Ancho completo
+    height: 3rem; // Igualar altura con inputs
+    font-size: 1rem; // Tamaño de fuente que se asemeje al input
+    font-weight: normal; // Ajustar el peso de la fuente si es necesario
+    margin-top: 1.5rem; // Espacio entre inputs y botón
+}
+
+.Cambiar {
+    display: flex;
+    justify-content: center; // Centrar el contenido horizontalmente
+    align-items: center; // Centrar el contenido verticalmente
+    width: 80%; // Asegurarse de que el contenedor tenga el ancho completo
+    transform: translateY(-20px);
+}
+
+.back {
+    padding-top: 6%;
+    margin-left: 5%;
+}

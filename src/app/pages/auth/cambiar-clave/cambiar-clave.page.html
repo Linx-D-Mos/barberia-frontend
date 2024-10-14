@@ -1,0 +1,35 @@
+<ion-content [fullscreen]="true">
+    <ion-icon (click)="goBack()" class="back" size="large" name="arrow-back-outline"></ion-icon>
+    <div class="container">
+        <ion-img class="logo" src="assets/logo.webp"></ion-img>
+        <form [formGroup]="cambiarForm">
+            <ion-input class="input" type="password" label="Ingresa tu nueva contraseña" label-placement="floating"
+                fill="outline" formControlName="password" (ionInput)="onInput($event)" placeholder="****************">
+                @if (pass) {
+                <ion-input-password-toggle color="medium" slot="end"></ion-input-password-toggle>
+                }
+            </ion-input>
+            <ion-input type="password" formControlName="password_confirmation" class="input"
+                label="Confirma tu nueva contraseña" label-placement="floating" fill="outline"
+                (ionInput)="onInputConfirm($event)" placeholder="****************">
+                <!-- Si la contraseña tiene un valor entonces se muestra el botón para que pueda hacerla visible -->
+                @if (pass_confirm) {
+                <ion-input-password-toggle color="medium" slot="end"></ion-input-password-toggle>
+                }
+            </ion-input>
+        </form>
+        <p>Cree una contraseña segura</p>
+        <!-- Si el usuario presiona el botón de "iniciemos", se activa el boton cargando, de lo contrario se muestra el botón "iniciemos" -->
+        <div class="Cambiar">
+            @if (isVerify) {
+            <ion-button>
+                <ion-spinner name="lines-small"></ion-spinner>
+            </ion-button>
+            }@else {
+            <ion-button [disabled]="cambiarForm.invalid" (click)="cambiarClave()">
+                Cambiar clave
+            </ion-button>
+            }
+        </div>
+    </div>
+</ion-content>

@@ -27,6 +27,7 @@ import { IonicModule } from '@ionic/angular';
 export class CitasPage implements OnInit {
 
   users: any[] = [];
+  time: string = '';
   date: string = '';
   perfil: any;
   public loaded: boolean = false;
