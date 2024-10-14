@@ -1,0 +1,83 @@
+<ion-header>
+  <ion-toolbar>
+    <div class="container">
+      <ion-icon
+        (click)="back()"
+        name="arrow-back-outline"
+        size="large"
+      ></ion-icon>
+    <ion-title>
+      SELECCIONA TU BARBERO
+    </ion-title>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense"></ion-header>
+
+  <div class="carrusel">
+    <swiper-container
+      [slides-per-view]="3"
+      centeredSlides="true"
+      [loop]="true"
+      [spaceBetween]="10"
+      [autoplay]="slideOpts.autoplay"
+      class="swiper-container"
+    >
+      @if(loaded){
+      <swiper-slide *ngFor="let user of users" class="slide-content">
+         <app-default-profile
+        [imageUrl]="user.photo"
+        [fullName]="user.name"
+      ></app-default-profile>
+        <p>{{ user.name }}</p>
+      </swiper-slide>
+      }@else {
+      <ion-thumbnail slot="start">
+        <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+      </ion-thumbnail>
+      }
+    </swiper-container>
+    <div class="button">
+      <ion-button expand="full" (click)="openModal()">Elegir</ion-button>
+
+    </div>
+  </div>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title
+        >{{ monthName }} {{ startDate.getDate() }} - {{ endDate.getDate()
+        }}</ion-card-title
+      >
+    </ion-card-header>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row class="week-row" justify-content-center>
+          <!-- Crear una fila con chips para cada día -->
+          <ion-row
+            *ngFor="let day of weekDays; let i = index"
+            size="auto"
+            class="day-col"
+          >
+            <!-- Color dinámico para el chip según si está seleccionado o no -->
+            <ion-chip
+              [disabled]="true"
+              [color]="i === selectedDayIndex ? 'primary' : 'light'"
+              (click)="selectDay(i)"
+              class="day-chip"
+            >
+              <ion-label>
+                <div class="day-container">
+                  <div>{{ day.shortName }}</div>
+                  <div>{{ day.date }}</div>
+                </div>
+              </ion-label>
+            </ion-chip>
+          </ion-row>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

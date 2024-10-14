@@ -58,7 +58,7 @@ export class ConfirmarCorreoPage implements OnInit {
     this.#authService.verifyEmail(this.verifyForm.value)
       .then((response) => {
         if (response?.data?.success === 1) {
-          this.authService.navigateByUrl('/citas');
+          this.authService.navigateByUrl('client/citas');
           console.log("si");
           this.isVerify = false;
           this.verifyForm.reset();

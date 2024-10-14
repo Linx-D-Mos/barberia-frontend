@@ -1,0 +1,87 @@
+.service {
+    margin-top: 7%;
+    padding-left: 5%;
+    width: 90%;
+
+    ion-label {
+        font-size: 15px;
+    }
+
+    .price {
+        font-size: 16.5px;
+        padding-top: 1.5%;
+    }
+}
+
+.text {
+    padding-top: 7%;
+    padding-left: 10%;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.anotaciones {
+    margin-top: 14%;
+    padding-left: 8%;
+    padding-right: 8%;
+
+    ion-label {
+        font-size: 25px;
+        font-weight: bold;
+    }
+}
+
+.bar {
+
+    padding-left: 4%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* Centra los elementos horizontalmente */
+    ion-button {
+        --color: black;
+    }
+
+    
+    ion-icon {
+        position: absolute;
+        /* Asegura que el ícono quede en la parte izquierda */
+    }
+   
+
+}
+
+.buy {
+    display: flex;
+    flex-direction: row;
+  
+    justify-content: space-between;
+    padding-right: 8%;
+    margin-top: 20%;
+    padding-left: 8%;
+
+    .buyto {
+        font-weight: bold;
+
+    }
+
+    .dinner {
+        background-color: rgb(187, 180, 180);
+        width: 40%;
+        min-height: 30px;
+        border: 0.5px solid black;
+        border-radius: 10px;
+        text-align: center;
+
+
+    }
+}
+
+.swipe{
+    margin-top: 10%;
+}
+
+
+  

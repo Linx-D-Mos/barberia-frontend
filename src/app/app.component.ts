@@ -3,7 +3,9 @@ import { IonApp, IonRouterOutlet, Platform, IonLabel } from '@ionic/angular/stan
 import { NetworkService } from './services/network/network.service';
 import { NoInternetBannerComponent } from './components/no-internet-banner/no-internet-banner.component';
 import { CommonModule } from '@angular/common';
+import { register } from 'swiper/element/bundle';
 
+register();
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',

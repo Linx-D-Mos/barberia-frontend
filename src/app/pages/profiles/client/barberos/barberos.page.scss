@@ -1,0 +1,100 @@
+.container {
+    padding-left: 7%;
+    padding-right: 7%;
+    ion-title{
+        text-align: center;
+    }
+    
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Distribuir el espacio entre los elementos */
+ 
+}
+
+
+.label {
+    font-size: 20px;
+    text-align: center;
+    flex: 1;
+    font-weight: bold;
+}
+
+swiper-container {
+    padding-top: 5%;
+    --swiper-pagination-bullet-inactive-color: var(--ion-text-color-step-800, #cccccc);
+    --swiper-pagination-color: var(--ion-color-primary, #0054e9);
+    --swiper-pagination-progressbar-bg-color: rgba(var(--ion-text-color-rgb, 0, 0, 0), 0.25);
+    --swiper-scrollbar-bg-color: rgba(var(--ion-text-color-rgb, 0, 0, 0), 0.1);
+    --swiper-scrollbar-drag-bg-color: rgba(var(--ion-text-color-rgb, 0, 0, 0), 0.5);
+    height: 230px;
+    width: 100%;
+}
+
+swiper-slide {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    transition: transform 0.3s ease;
+    transform: scale(0.8);
+    /* Los slides laterales son más pequeños */
+}
+
+swiper-slide.swiper-slide-active {
+    transform: scale(1.1);
+    /* El slide activo es más grande */
+}
+
+ion-img {
+    width: 100px;
+    height: 100px;
+}
+
+.button {
+    padding-left: 22%;
+    padding-right: 22%;
+    width: 100%;
+    /* Hacer que el botón ocupe todo el ancho del contenedor */
+    display: flex;
+    justify-content: center;
+    /* Alinear el botón al centro */
+}
+
+ion-card {
+    margin-top: 5%;
+    border-radius: 15px;
+
+    ion-label {
+        font-size: 10px;
+        color: black;
+    }
+
+    ion-row {
+        display: flex;
+        justify-content: center;
+    }
+
+    ion-chip {
+        border: 1px solid black;
+        height: 50px;
+        font-weight: bold;
+        background-color: rgb(190, 190, 190);
+        margin: 2px;
+    }
+
+    ion-card-title {
+        font-size: 17px;
+        font-weight: bold;
+    }
+
+    ion-card-header {
+        margin: 1px;
+        flex-direction: row-reverse;
+    }
+}
+
+.day-container {
+    text-align: center;
+}

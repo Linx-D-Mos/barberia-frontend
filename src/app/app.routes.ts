@@ -50,6 +50,13 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/profiles/client/citas/citas.page').then(m => m.CitasPage),
       },
 
+      {
+        path: 'barberos',
+        loadComponent: () => import('./pages/profiles/client/barberos/barberos.page').then( m => m.BarberosPage)
+      },
+      
+  
+
     ]
   },
   {
@@ -67,6 +74,12 @@ export const routes: Routes = [
     path: 'prueba',
     loadComponent: () => import('./pages/prueba/prueba.page').then( m => m.PruebaPage)
   },
+ 
+
+ 
+
+
+
 
 
 

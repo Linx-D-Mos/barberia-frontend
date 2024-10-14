@@ -21,7 +21,7 @@ import { IonicModule } from '@ionic/angular';
   imports: [
     CommonModule,
     FormsModule,
-    IonicModule // Agregamos IonicModule para acceder a los componentes de Ionic
+    IonicModule // Agregamos IonicModule para acceder a los componentes de Ionic 
   ]
 })
 export class CitasPage implements OnInit {
