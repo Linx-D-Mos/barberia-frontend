@@ -25,6 +25,7 @@
       <app-default-profile
         [imageUrl]="profile.data.user.photo"
         [fullName]="profile.data.user.name"
+        (click)="selectphoto()"
       ></app-default-profile>
       }@else {
       <ion-thumbnail slot="start">
