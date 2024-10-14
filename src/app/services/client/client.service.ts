@@ -39,4 +39,52 @@ export class ClientService {
       throw e;
     }
   }
+
+  //obtener las barberias para afiliarse
+  async getBarberShops() {
+    // Token de autenticación
+    const token = await this.#authService.obtenerToken();
+
+    const options = {
+      url: environment.serverUrl + 'client/barbershops',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    try {
+      const response = await CapacitorHttp.get(options);
+
+      return response;
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  //afiliar cliente a barberia
+  async afiliarBarberia(barbershop_id: number) {
+    const data = { "barbershop_id": barbershop_id };
+    // Token de autenticación
+    const token = await this.#authService.obtenerToken();
+
+    const options = {
+      url: environment.serverUrl + 'client/barbershop_affiliate',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      data: JSON.stringify(data),
+    };
+
+    try {
+      const response = await CapacitorHttp.put(options);
+
+      return response.data;
+    } catch (e) {
+      throw e;
+    }
+  }
+
+
+
 }

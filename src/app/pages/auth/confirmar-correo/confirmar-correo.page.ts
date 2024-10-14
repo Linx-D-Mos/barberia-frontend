@@ -9,6 +9,7 @@ import { environment } from 'src/environments/environment.prod';
 import { CapacitorHttp } from '@capacitor/core';
 import { AuthService } from '../../../services/auth/auth.service';
 import { VerifyEmailService } from '../../../services/verify/verify-email.service';
+import { DataService } from 'src/app/services/data/data.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({

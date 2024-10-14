@@ -359,6 +359,7 @@ export class AuthService {
   async showAlert(message: string) {
     const alert = await this.#alertCtrl.create({
       header: 'Error de Autenticacion',
+      cssClass: 'app-alert',
       message: message,
       buttons: ['OK'],
     });

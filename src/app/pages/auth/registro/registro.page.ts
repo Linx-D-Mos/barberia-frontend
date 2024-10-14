@@ -17,6 +17,7 @@ import { AuthService } from '../../../services/auth/auth.service';
 import { RouterLink } from '@angular/router';
 import { InputOtpModule } from 'primeng/inputotp';
 import { ButtonModule } from 'primeng/button';
+import { DataService } from 'src/app/services/data/data.service';
 
 @Component({
   selector: 'app-registro',
@@ -43,6 +44,14 @@ export class RegistroPage implements OnInit {
    * @type {AuthService}
    */
   private authService = inject(AuthService);
+
+  /**
+   * Servicio de envio y recepcion de datos inyectado.
+   * 
+   * @private
+   * @type {DataService}
+   */
+  private dataService = inject(DataService);
 
   /* ********************************** FIN DE LAS INYECCIONES ********************************** */
 

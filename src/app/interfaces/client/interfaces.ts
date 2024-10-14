@@ -22,9 +22,21 @@ export interface Barbershop {
     name:       string;
     address:    string;
     phone:      string;
-    number:     string;
+    owner_id:   string;
+    status:     string;
     created_at: Date;
     updated_at: Date;
+    schedules:  Schedule[];
+}
+export interface Schedule {
+    id:            number;
+    barbershop_id: number;
+    day:           string;
+    start_time:    string;
+    end_time:      string;
+    is_available:  number;
+    created_at:    Date;
+    updated_at:    Date;
 }
 
 export interface Role {
