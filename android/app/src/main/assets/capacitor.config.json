@@ -1,0 +1,14 @@
+{
+	"appId": "com.barberconnect.app",
+	"appName": "Barber Connect",
+	"webDir": "www",
+	"plugins": {
+		"PushNotifications": {
+			"presentationOptions": [
+				"badge",
+				"sound",
+				"alert"
+			]
+		}
+	}
+}
