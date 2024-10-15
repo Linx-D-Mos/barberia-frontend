@@ -110,8 +110,10 @@ export class RegistroPage implements OnInit {
     this.authService
       .register(this.regisForm.value)
       .then((response) => {
+        const emailValue = this.regisForm.get('email')?.value; // Obteniendo el valor del correo
         if (response?.data?.success === 1) {
           this.authService.navigateByUrl('auth/confirmar-correo/registrar');
+          this.authService.setEmail(this.regisForm.get('email')?.value);
           this.isRegister = false;
           this.regisForm.reset();
         } else {
