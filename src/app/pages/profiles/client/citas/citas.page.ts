@@ -1,28 +1,33 @@
 import { Component, inject, OnInit } from '@angular/core';
+import { ActionSheetController, AlertController, ModalController, NavController } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonImg, IonLabel, IonSkeletonText, IonIcon, IonCard, IonCardTitle, IonCardContent, IonCardSubtitle, IonCardHeader, IonButton, IonList, IonItem, IonFooter, IonFab, IonFabButton, IonText } from '@ionic/angular/standalone';
-import { Profile } from 'src/app/interfaces/client/interfaces';
-import { AuthService } from 'src/app/services/auth/auth.service';
-import { ClientService } from 'src/app/services/client/client.service';
-import { personCircleOutline, add, homeOutline, notificationsOutline, notifications, home, cameraOutline, imageOutline } from 'ionicons/icons';
-import { ActionSheetController, AlertController, ModalController, NavController } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { DetallesComponent } from 'src/app/components/detalles/detalles.component';
-import { delay, from, Observable, tap } from 'rxjs';
+import { personCircleOutline } from 'ionicons/icons';
 import { CapacitorHttp, HttpResponse } from '@capacitor/core';
-import { DefaultProfileComponent } from "../../../../components/default-profile/default-profile.component";
+import { from, Observable } from 'rxjs';
+import { delay, tap } from 'rxjs/operators';
+import { AuthService } from '../../../../services/auth/auth.service';
+import { DetallesComponent } from '../../../../components/detalles/detalles.component';
+
+// Importar módulos de Ionic necesarios
+import { IonicModule } from '@ionic/angular';
+import { ClientService } from 'src/app/services/client/client.service';
+import { Profile } from 'src/app/interfaces/client/interfaces';
 
 @Component({
   selector: 'app-citas',
   templateUrl: './citas.page.html',
   styleUrls: ['./citas.page.scss'],
   standalone: true,
-  imports: [IonText, IonFabButton, IonFab, IonFooter, IonItem, IonList, IonButton, IonCardHeader, IonCardSubtitle, IonCardContent, IonCardTitle, IonCard, IonIcon, IonSkeletonText, IonLabel, IonImg, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, DefaultProfileComponent]
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonicModule // Agregamos IonicModule para acceder a los componentes de Ionic 
+  ]
 })
 export class CitasPage implements OnInit {
 
-  
   profile!: Profile;
   users: any[] = [];
   time: string = '';
@@ -38,11 +43,12 @@ export class CitasPage implements OnInit {
     private alertController: AlertController,
     public modalController: ModalController
   ) {
-    addIcons({personCircleOutline,add,cameraOutline,imageOutline,home,notifications});
+    addIcons({ personCircleOutline });
   }
 
   ngOnInit() {
     this.date = new Date().toLocaleDateString();
+    this.cargarDatos().subscribe();
     this.getProfile();
   }
 
@@ -64,6 +70,19 @@ export class CitasPage implements OnInit {
   }
 
 
+  cargarDatos(): Observable<HttpResponse> {
+    const datos = {
+      url: 'https://jsonplaceholder.typicode.com/users'
+    };
+
+    return from(CapacitorHttp.get(datos)).pipe(
+      delay(3000),
+      tap((response: HttpResponse) => {
+        this.users = response.data;
+        this.loaded = true;
+      })
+    );
+  }
 
   getCurrentDateTime() {
     const now = new Date();
@@ -74,9 +93,6 @@ export class CitasPage implements OnInit {
 
   irPerfil() {
     this.nav.navigateForward('client/perfil');
-  }
-  elegirBarber() {
-    this.nav.navigateForward('client/barberos');
   }
 
   getProfile() {

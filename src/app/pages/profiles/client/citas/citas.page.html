@@ -3,30 +3,31 @@
     <div class="container">
       <ion-img routerLink="/home" class="logo" src="assets/logo.webp"></ion-img>
       <ion-label class="name">
-        Bienvenido <br />
-        @if(loaded){ {{profile.data.user.name}} } @if(!loaded){
+        Bienvenido <br>
+        @if(loaded){
+        {{profile.data.user.name}}
+        }
+        @if(!loaded){
         <p>
-          <ion-skeleton-text
-            [animated]="true"
-            style="width: 80%; height: 1em"
-          ></ion-skeleton-text>
+          <ion-skeleton-text [animated]="true" style="width: 80%; height: 1em;;"></ion-skeleton-text>
         </p>
         }
       </ion-label>
-      <app-default-profile
-      (click)="irPerfil()"
-    ></app-default-profile>
+      <ion-icon (click)="irPerfil()" class="account" name="person-circle-outline" size="large"></ion-icon>
+
     </div>
   </ion-toolbar>
+
 </ion-header>
 <ion-content [fullscreen]="true">
+
+  @if(loaded) {
   <!--lista de cards de citas pendientes-->
-  <!-- @if(loaded) {
   <ion-card class="cartas" *ngFor="let user of users">
     <ion-card-header>
       <ion-card-title>{{user.name}}</ion-card-title>
       <ion-card-subtitle>Fecha: {{date}}</ion-card-subtitle>
-      <ion-card-subtitle>Hora: {{time}}</ion-card-subtitle>
+      <!-- <ion-card-subtitle>Hora: {{time}}</ion-card-subtitle> -->
     </ion-card-header>
     <ion-card-content class="card-content">
       <div class="info">
@@ -34,69 +35,29 @@
       </div>
     </ion-card-content>
   </ion-card>
-  } -->
-  @if(!loaded) { @for(item of ionContentList; track $index){
-  <ion-list style="width: 100%; height: auto; padding: 4%">
+
+  }
+  @if(!loaded) {
+  @for(item of ionContentList; track $index){
+  <ion-list style="width: 100%; height: auto; padding: 4%;">
     <ion-item>
       <ion-label>
         <h1>
-          <ion-skeleton-text
-            [animated]="true"
-            style="width: 50%; height: 1.3rem"
-          ></ion-skeleton-text>
+          <ion-skeleton-text [animated]="true" style="width: 50%; height: 1.3rem;"></ion-skeleton-text>
         </h1>
         <p>
-          <ion-skeleton-text
-            [animated]="true"
-            style="width: 30%; height: 1.1rem"
-          ></ion-skeleton-text>
+          <ion-skeleton-text [animated]="true" style="width: 30%; height: 1.1rem"></ion-skeleton-text>
         </p>
         <p>
-          <ion-skeleton-text
-            [animated]="true"
-            style="width: 30%; height: 1.1rem"
-          ></ion-skeleton-text>
+          <ion-skeleton-text [animated]="true" style="width: 30%; height: 1.1rem"></ion-skeleton-text>
         </p>
         <p>
-          <ion-skeleton-text
-            [animated]="true"
-            style="
-              border-radius: 5px;
-              width: 36%;
-              height: 2.2rem;
-              background-color: rgb(226, 226, 226);
-              margin-left: 60%;
-            "
-          ></ion-skeleton-text>
+          <ion-skeleton-text [animated]="true"
+            style="border-radius: 5px; width: 36%; height: 2.2rem; background-color: rgb(226, 226, 226); margin-left: 60%;"></ion-skeleton-text>
         </p>
       </ion-label>
     </ion-item>
   </ion-list>
-  } }
-  <div class="float">
-    <ion-fab vertical="bottom" horizontal="end" slot="fixed" class="add">
-      <ion-button (click)="elegirBarber()">
-        <ion-icon  name="add"></ion-icon>
-        <ion-label>agendar</ion-label>
-      </ion-button>
-    </ion-fab>
-  </div>
-  
+  }
+  }
 </ion-content>
-
-<ion-footer>
-  <div class="toggles">
-    <ion-button slot="fixed" fill="clear" size="large">
-      <div class="foto">
-        <ion-icon slot="icon-only" class="camera" name="home"></ion-icon>
-        <ion-label>Home</ion-label>
-      </div>
-    </ion-button>
-    <ion-button  slot="fixed" fill="clear" size="large">
-      <div class="image">
-        <ion-icon slot="icon-only" class="galery" name="notifications"></ion-icon>
-        <ion-label>Notificaciones</ion-label>
-      </div>
-    </ion-button>
-  </div>
-</ion-footer>
