@@ -40,22 +40,144 @@
 @import "primeng/resources/themes/lara-light-blue/theme.css";
 @import "primeng/resources/primeng.css";
 
-//estilo de la alerta de auth service
-.app-alert .alert-wrapper {
+.alerta-success .alert-wrapper {
   .alert-head {
-    background: var(--ion-color-primary);
+    align-content: center;
+    background: rgb(62, 203, 97);
+    width: 100%;
 
-    h2 {
-      color: white;
+    .alert-title {
+      text-align: center;
+      font-size: 50px;
+      color: rgb(255, 255, 255);
+      font-weight: bold;
     }
+
+    .alert-sub-title {
+      text-align: center;
+      font-size: xx-large;
+      color: rgb(255, 255, 255);
+    }
+  }
+
+  .alert-message {
+    text-align: center;
+    font-size: medium;
+    margin-top: 10px;
   }
 
   .alert-button-group {
     button {
-      background: var(--ion-color-primary);
-      span {
-        color: white;
-      }
+      background: rgb(62, 203, 97);
+      color: white;
+      font-weight: 600;
+      border-radius: 10px;
+    }
+  }
+}
+
+.alerta-error .alert-wrapper {
+  .alert-head {
+    align-content: center;
+    background: rgb(212, 68, 68);
+    width: 100%;
+
+    .alert-title {
+      text-align: center;
+      font-size: 50px;
+      color: rgb(255, 255, 255);
+      font-weight: bold;
+    }
+
+    .alert-sub-title {
+      text-align: center;
+      font-size: xx-large;
+      color: rgb(255, 255, 255);
+    }
+  }
+
+  .alert-message {
+    text-align: center;
+    font-size: medium;
+    margin-top: 10px;
+  }
+
+  .alert-button-group {
+    button {
+      background: rgb(212, 68, 68);
+      color: white;
+      font-weight: 600;
+      border-radius: 10px;
+    }
+  }
+}
+
+.alerta-warning .alert-wrapper {
+  .alert-head {
+    align-content: center;
+    background: rgb(225, 203, 55);
+    width: 100%;
+
+    .alert-title {
+      text-align: center;
+      font-size: 50px;
+      color: rgb(255, 255, 255);
+    }
+
+    .alert-sub-title {
+      text-align: center;
+      font-size: xx-large;
+      color: rgb(255, 255, 255);
+    }
+  }
+
+  .alert-message {
+    text-align: center;
+    font-size: medium;
+    margin-top: 10px;
+  }
+
+  .alert-button-group {
+    button {
+      background: rgb(225, 203, 55);
+      color: white;
+      font-weight: 600;
+      border-radius: 10px;
+    }
+  }
+}
+
+.alerta-info .alert-wrapper {
+  .alert-head {
+    align-content: center;
+    background: rgb(67, 151, 230);
+    width: 100%;
+
+    .alert-title {
+      text-align: center;
+      font-size: 50px;
+      color: rgb(255, 255, 255);
+    }
+
+    .alert-sub-title {
+      text-align: center;
+      font-size: xx-large;
+      color: rgb(255, 255, 255);
+    }
+  }
+
+  .alert-message {
+    text-align: center;
+    font-size: medium;
+    margin-top: 10px;
+  }
+
+  .alert-button-group {
+    button {
+      background: rgb(67, 151, 230);
+      color: white;
+      font-weight: 600;
+      border-radius: 10px;
     }
   }
 }
