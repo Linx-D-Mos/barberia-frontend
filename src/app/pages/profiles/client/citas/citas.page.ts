@@ -14,6 +14,7 @@ import { DetallesComponent } from '../../../../components/detalles/detalles.comp
 import { IonicModule } from '@ionic/angular';
 import { ClientService } from 'src/app/services/client/client.service';
 import { Profile } from 'src/app/interfaces/client/interfaces';
+import { DefaultProfileComponent } from "../../../../components/default-profile/default-profile.component";
 
 @Component({
   selector: 'app-citas',
@@ -23,11 +24,11 @@ import { Profile } from 'src/app/interfaces/client/interfaces';
   imports: [
     CommonModule,
     FormsModule,
-    IonicModule // Agregamos IonicModule para acceder a los componentes de Ionic 
+    IonicModule,
+    DefaultProfileComponent,
   ]
 })
 export class CitasPage implements OnInit {
-
   profile!: Profile;
   users: any[] = [];
   time: string = '';

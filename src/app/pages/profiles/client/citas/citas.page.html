@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <div class="container">
-      <ion-img routerLink="/home" class="logo" src="assets/logo.webp"></ion-img>
+      <ion-img class="logo" src="assets/logo.webp"></ion-img>
       <ion-label class="name">
         Bienvenido <br>
         @if(loaded){
@@ -9,11 +9,29 @@
         }
         @if(!loaded){
         <p>
-          <ion-skeleton-text [animated]="true" style="width: 80%; height: 1em;;"></ion-skeleton-text>
+          <!-- <ion-skeleton-text [animated]="true" style="width: 80%; height: 1em;;"></ion-skeleton-text> -->
         </p>
         }
       </ion-label>
-      <ion-icon (click)="irPerfil()" class="account" name="person-circle-outline" size="large"></ion-icon>
+      <!-- EL componente recibe 4 parametros: 
+            1- fullName: este debe ser un string
+            2- imageUrl: debe ser string
+            3- size: un number, esto es para darle el tamaño al componente
+            4- backGroundColor: (OPCIONAL) un string, este es para darle el color de fondo al componente,
+                si no se envia este parametro entonces el color aleatorio,
+                se usa mas que todo para mostrar mientras se carga la imagen.
+            
+            Como los parametros name y photo viene de una consulta y esta tarda tiempo, 
+            entonces toca verificar si este ya se cargo con el loaded, y si no entonces se muestra el mismo componente pero solo
+            con el parametro size
+      -->
+      @if (loaded) {
+      <app-default-profile [fullName]="profile.data.user.name" [imageUrl]="profile.data.user.photo" [size]="60"
+        (click)="irPerfil()"></app-default-profile>
+      }@else {
+        <!-- Caso de uso, se muestra un circulo de color gris claro mientras se carga el img o el name -->
+      <app-default-profile [size]="60" [background]="'#CDCDCD'"></app-default-profile>
+      }
 
     </div>
   </ion-toolbar>

@@ -1,16 +1,19 @@
-import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
+import { IonImg} from "@ionic/angular/standalone";
+
+
 @Component({
   selector: 'app-default-profile',
-  standalone: true,
   templateUrl: './default-profile.component.html',
   styleUrls: ['./default-profile.component.scss'],
-  imports: [IonicModule, CommonModule],
+  standalone: true,
+  imports: [ IonImg ],
 })
 export class DefaultProfileComponent implements OnInit {
-  @Input() imageUrl: string | null = null;
+  @Input() imageUrl: string | null = '';
   @Input() fullName: string = ''; //este seria el inpñut que recive el name
+  @Input() size: number = 0;
+  @Input() background: string = '';
 
   private colors = [
     '#D9D9D9',
@@ -33,12 +36,16 @@ export class DefaultProfileComponent implements OnInit {
   backgroundColor: string = '';
 
   ngOnInit() {
+    
     const espacios = this.fullName.trim().split(' ');
     this.firstName = espacios[0] || '';
     this.lastName = espacios[1] || '';
 
     this.initials = this.getInitials();
     this.backgroundColor = this.getRandomColor();
+    if(this.background !=null) {
+      this.backgroundColor = this.background;
+    }
   }
 
   getInitials(): string {
