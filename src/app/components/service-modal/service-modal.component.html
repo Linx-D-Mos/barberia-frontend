@@ -28,29 +28,19 @@
 <ion-content>
   <div class="service">
     <ion-list>
-      <ion-item>
-        <ion-label
-          >Corte Sencillo
-          <ion-label class="price">$15.000</ion-label>
-        </ion-label>
-        <ion-toggle mode="ios" slot="end"></ion-toggle>
-      </ion-item>
-
-      <ion-item>
-        <ion-label
-          >Barba
-          <ion-label class="price">$5.000</ion-label>
-        </ion-label>
-        <ion-toggle mode="ios" slot="end"></ion-toggle>
-      </ion-item>
-
-      <ion-item>
-        <ion-label
-          >Depilacion de cejas
-          <ion-label class="price">$5.000</ion-label>
-        </ion-label>
-        <ion-toggle mode="ios" slot="end"></ion-toggle>
-      </ion-item>
+      @if(loaded){
+        <ion-item *ngFor="let service of services.services">
+          <ion-label> {{service.name}}
+            <ion-label class="price">{{service.price}}</ion-label>
+          </ion-label>
+          <ion-toggle mode="ios" slot="end"></ion-toggle>
+        </ion-item>
+      }@else {
+        <ion-skeleton-text
+        [animated]="true"
+        style="width: 80%; height: 1em"
+      ></ion-skeleton-text>
+      }
     </ion-list>
   </div>
 
@@ -62,8 +52,6 @@
   </div>
 
   <div class="swipe">
-    <app-swipe-button>
-    </app-swipe-button>
-</div>
-
+    <app-swipe-button> </app-swipe-button>
+  </div>
 </ion-content>

@@ -56,3 +56,21 @@ export interface User {
     created_at:        Date;
     updated_at:        Date;
 }
+
+
+export interface ServicesClient {
+    success:  number;
+    message:  string;
+    services: Service[];
+}
+
+export interface Service {
+    id:            number;
+    barbershop_id: number;
+    name:          string;
+    description:   string;
+    duration:      number;
+    price:         string;
+    created_at:    Date;
+    updated_at:    Date;
+}
