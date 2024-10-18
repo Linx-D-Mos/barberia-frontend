@@ -1,12 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <div class="container">
-      <ion-icon
-        (click)="back()"
-        name="arrow-back-outline"
-        size="large"
-        class="back"
-      ></ion-icon>
+      <ion-icon (click)="back()" name="arrow-back-outline" size="large" class="back"></ion-icon>
       <ion-label class="label">Perfil</ion-label>
       <ion-icon class="save" name="save-outline" size="large"></ion-icon>
     </div>
@@ -22,22 +17,21 @@
   <div class="content">
     <div class="account">
       @if (loaded) {
-      <app-default-profile
-        [imageUrl]="profile.data.user.photo"
-        [fullName]="profile.data.user.name"
-      ></app-default-profile>
+      <app-default-profile 
+        [imageUrl]="profile.data.user.photo" 
+        [fullName]="profile.data.user.name" 
+        [size]="100" 
+        (click)="selectphoto()">
+      </app-default-profile>
       }@else {
-      <ion-thumbnail slot="start">
-        <ion-skeleton-text [animated]="true"></ion-skeleton-text>
-      </ion-thumbnail>
+        <!-- Caso de uso, se muestra un circulo color gris claro mientras se carga el img o el name -->
+      <app-default-profile [size]="100" [background]="'#CDCDCD'"></app-default-profile>
       }
     </div>
 
     <div class="info">
-      <ion-label
-        >Informacion <br />
-        personal</ion-label
-      >
+      <ion-label>Informacion <br />
+        personal</ion-label>
       <ion-label>Historial</ion-label>
     </div>
 
@@ -47,10 +41,7 @@
         <ion-label>
           @if(loaded){ {{profile.data.user.name}} } @if(!loaded){
           <p>
-            <ion-skeleton-text
-              [animated]="true"
-              style="width: 80%; height: 1em"
-            ></ion-skeleton-text>
+            <ion-skeleton-text [animated]="true" style="width: 80%; height: 1em"></ion-skeleton-text>
           </p>
           }
         </ion-label>
@@ -60,10 +51,7 @@
         <ion-label>
           @if(loaded){ {{profile.data.user.phone}} } @if(!loaded){
           <p>
-            <ion-skeleton-text
-              [animated]="true"
-              style="width: 80%; height: 1em"
-            ></ion-skeleton-text>
+            <ion-skeleton-text [animated]="true" style="width: 80%; height: 1em"></ion-skeleton-text>
           </p>
           }
         </ion-label>

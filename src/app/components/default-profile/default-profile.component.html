@@ -1,8 +1,12 @@
-<div *ngIf="imageUrl; else defaultAvatar">
- <ion-img [src]="imageUrl" alt="Foto de perfil" class="avatar-image"></ion-img>
-</div>
-<ng-template #defaultAvatar>
-  <div class="default-avatar" [style.background-color]="backgroundColor">
+<!--si no envian el parametro imageUrl o este viene como null, que no se ha asignado en la base de datos,
+    entonces muestra las iniciales del nombre-->
+@if (imageUrl == null || imageUrl == '') {
+  <div class="default-avatar" [style.background-color]="backgroundColor" [style.width.px]="size" [style.height.px]="size">
     {{ initials }}
   </div>
-</ng-template>
+}
+<!-- si la imagen viene con un contenido, se muestra -->
+@else {
+  <ion-img [src]="imageUrl" class="avatar-image" [style.width.px]="size" [style.height.px]="size">
+  </ion-img>
+}

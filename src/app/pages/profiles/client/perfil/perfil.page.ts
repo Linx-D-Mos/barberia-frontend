@@ -82,6 +82,10 @@ export class PerfilPage implements OnInit {
     this.nav.back();
   }
 
+  selectphoto(){
+    this.nav.navigateForward('client/photo-profile')
+  }
+
   getPerfil() {
     this.authService.perfil()
       .then((response) => {

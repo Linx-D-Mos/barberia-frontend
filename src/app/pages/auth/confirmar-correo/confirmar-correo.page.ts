@@ -42,7 +42,6 @@ export class ConfirmarCorreoPage implements OnInit {
     this.route.params.subscribe(params => {
       this.contexto = params['contexto']; // Obtiene el parámetro contexto
       console.log('Valor de contexto:', this.contexto);
-
       // Aquí puedes llamar a getEmail() si es necesario
       this.getEmail();
     });
@@ -51,17 +50,7 @@ export class ConfirmarCorreoPage implements OnInit {
 
   getEmail() {
     if (this.contexto === 'registrar') {
-      this.authService.perfil()
-        .then((response) => {
-          if (response?.data?.success === 1) {
-            this.email = response.data; // Asigna el email recibido
-          } else {
-            this.authService.showAlert('Su token de acceso ya no es válido, por favor inicie sesión nuevamente.');
-          }
-        })
-        .catch(e => {
-          this.authService.showAlert(e?.error?.message);
-        });
+      this.email = this.authService.getEmail(); // Obtiene el email almacenado en el servicio
     } else if (this.contexto === 'recuperar') {
       this.email = this.authService.getEmail(); // Obtiene el email almacenado en el servicio
     }

@@ -22,7 +22,6 @@ import { DefaultProfileComponent } from "../../../../components/default-profile/
 })
 export class CitasPage implements OnInit {
 
-  
   profile!: Profile;
   users: any[] = [];
   time: string = '';
@@ -49,8 +48,8 @@ export class CitasPage implements OnInit {
   async openShare() {
     const modal = await this.modalController.create({
       component: DetallesComponent,
-      initialBreakpoint: 1,
-      breakpoints: [0, 1],
+      initialBreakpoint: 0.74,
+      breakpoints: [0.5, 0.5],
       cssClass: 'my-custom-class',
     });
     modal.onDidDismiss().then(() => {

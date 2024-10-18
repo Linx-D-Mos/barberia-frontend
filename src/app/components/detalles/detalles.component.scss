@@ -23,11 +23,10 @@
 }
 
 .container-content-card h3 {
-    margin-bottom: 2vh;
+    margin-bottom: 3vh;
     font-size: 2rem; /* Tamaño escalable más grande para mejor legibilidad */
     font-weight: bold;
 }
-
 .container-content-card .fotousuario {
     width: 30vw; /* Tamaño relativo al ancho de la pantalla */
     max-width: 180px; /* Tamaño máximo para evitar que se haga muy grande */
@@ -50,7 +49,11 @@
     font-size: 1rem;
     font-weight: bold;
     margin-top: 2vh;
-    gap: 1.5vh; /* Espacio entre los servicios */
+}
+
+.opciones-servicio {
+    height: auto;
+    overflow: scroll;
 }
 
 .cerrar {
